@@ -5,7 +5,7 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 面向 **卫生事业管理 / 公共卫生 / 数字治理** 方向的 2SFCA（两步移动搜索法）最小项目：
-不用装 ArcGIS，不依赖 GeoPandas，准备好两张 CSV 就能算；算完直接出 CSV、GeoJSON、论文图、可交互网页地图，并能继续做 LISA 和 SLM/SEM 空间回归。
+不用装 ArcGIS，不依赖 GeoPandas，准备好两张 CSV 就能算；算完直接出 CSV、GeoJSON、论文图、可交互网页地图，并能继续做 LISA、SLM/SEM 和 GWR。
 
 > 仓库内全部为**模拟数据**：虚构的“临江市”、120 个社区、15 家医疗机构。
 > 机构名、位置、人口、床位均不对应真实地点，可直接公开上传 GitHub。
@@ -190,6 +190,9 @@ python code/two_step_fca.py --threshold-km 10 --output-dir output/d10
 | `output/spatial_regression_fits.csv` | 三个模型的 logL、AIC、BIC、残差 Moran's I |
 | `output/spatial_regression_fitted.csv` | 每个社区的实际值、拟合值和残差 |
 | `output/spatial_regression_summary.json` | 模型比较、LR 检验和方法说明 |
+| `output/gwr_coefficients.csv` | 每个社区的 GWR 局部系数、局部 t 值、局部 R² |
+| `output/gwr_summary.json` | 带宽选择、AICc、局部系数范围和共线性诊断 |
+| `output/gwr_map.png` | GWR 局部可达性系数地图 |
 
 字段解释：
 
@@ -299,16 +302,16 @@ python code/spatial_regression.py
 
 | 模型 | 可达性系数 | 空间参数 | 残差 Moran's I | AIC |
 |---|---:|---:|---:|---:|
-| OLS | 0.0141*** | — | 0.226*** | -572.2 |
-| SLM | 0.0140*** | ρ = 0.006, p = 0.942 | 0.224*** | -570.2 |
-| SEM | 0.0145*** | λ = 0.573*** | 0.032, p = 0.415 | -587.9 |
+| OLS | 0.0189*** | — | 0.409*** | -497.9 |
+| SLM | 0.0130*** | ρ = 0.385*** | 0.282*** | -525.1 |
+| SEM | 0.0173*** | λ = 0.805*** | 0.041, p = 0.315 | -549.1 |
 
 怎么读：
 
-- OLS 残差仍有显著空间自相关（Moran's I = 0.226, p < 0.001），说明普通回归的标准误不可靠；
-- SLM 的 ρ 接近 0 且不显著，说明“邻居的就医利用直接带动本社区”这个机制不明显；
-- SEM 的 λ = 0.573 且显著，残差 Moran's I 降到 0.032，AIC 也最低，说明空间依赖主要在误差项；
-- 三个模型里可达性系数都为正且显著，但这是模拟数据，不能直接当因果结论。
+- OLS 残差仍有显著空间自相关（Moran's I = 0.409, p < 0.001），普通回归的标准误不可靠；
+- SLM 的 ρ = 0.385 显著，说明邻居的就医利用会通过空间滞后影响本社区；可达性的直接效应 0.0130，总效应约 0.0211；
+- SEM 的 λ = 0.805 且显著，残差 Moran's I 降到 0.041（p = 0.315），AIC 最低，说明空间依赖很大一部分在误差项；
+- SLM 和 SEM 都优于 OLS，SEM 的 AIC 更低；三个模型里可达性系数都为正且显著，但这是模拟数据，不能直接当因果结论。
 
 输出文件：
 
@@ -318,6 +321,38 @@ python code/spatial_regression.py
 - `spatial_regression_summary.json`：LR 检验和方法说明。
 
 **方法边界**：这是教学用最大似然实现，标准误由数值 Hessian 近似，ρ/λ 的检验在边界上要谨慎。正式论文建议用 `spreg` 或 GeoDa 复核，并做不同 k、不同权重、不同控制变量的敏感性分析；不要只报一个模型的结果。
+
+### 空间异质性：GWR
+
+SLM/SEM 给出的是“全局平均效应”。如果你怀疑**可达性的作用在不同区域不一样**，可以再跑地理加权回归：
+
+```powershell
+python code/gwr.py
+```
+
+自适应 bisquare 核 + AICc 选带宽，示例结果：
+
+```text
+带宽 k = 35
+局部可达性系数 0.0144 ~ 0.0319，中位数 0.0181
+局部 R² 中位数 0.941
+```
+
+解读：
+
+- 市中心局部系数更高（约 0.03），边缘更低（约 0.015），说明可达性对就医利用的关联在中心城区更强；
+- 全局 OLS 系数 0.0189 只是一个平均值，会掩盖这种空间差异；
+- GWR 的局部系数不是因果效应，也不能直接拿来做政策排序。
+
+![GWR 局部可达性系数](output/gwr_map.png)
+
+输出：
+
+- `gwr_coefficients.csv`：每个社区的局部截距、局部可达性/老年/收入系数、局部 t 值、局部 R²、条件数；
+- `gwr_summary.json`：带宽选择、AICc、有效参数、局部系数范围、局部共线性诊断；
+- `gwr_map.png/svg`：局部可达性系数地图。
+
+**方法边界**：GWR 对带宽、局部共线性和异常值很敏感。示例中最大条件数超过 60 万，说明部分局部设计矩阵接近共线，局部系数要谨慎解读；正式论文应报告带宽敏感性、局部共线性，并考虑多重比较问题。
 
 ---
 
@@ -400,6 +435,7 @@ python code/spatial_regression.py
 │   ├── two_step_fca.py       # 2SFCA 核心 + CSV/GeoJSON/地图输出
 │   ├── spatial_autocorr.py   # 全局 Moran's I + 局部 LISA
 │   ├── spatial_regression.py # OLS / SLM / SEM
+│   ├── gwr.py                # 地理加权回归
 │   ├── make_outcome_data.py  # 生成模拟就医利用结果
 │   ├── make_web_map.py       # 生成 docs/index.html 交互地图
 │   └── make_demo_data.py     # 重新生成模拟数据
@@ -424,11 +460,16 @@ python code/spatial_regression.py
 │   ├── spatial_regression_coefficients.csv
 │   ├── spatial_regression_fits.csv
 │   ├── spatial_regression_fitted.csv
-│   └── spatial_regression_summary.json
+│   ├── spatial_regression_summary.json
+│   ├── gwr_coefficients.csv
+│   ├── gwr_summary.json
+│   ├── gwr_map.png
+│   └── gwr_map.svg
 ├── tests/
 │   ├── test_two_step_fca.py  # 手算例子校验公式
 │   ├── test_spatial_autocorr.py
 │   ├── test_spatial_regression.py
+│   ├── test_gwr.py
 │   └── test_web_map.py       # 校验网页地图生成
 ├── CITATION.cff
 ├── LICENSE
@@ -450,7 +491,7 @@ python code/two_step_fca.py
 - **换路网**：用 QGIS 的 ORS Tools、OSRM，或高德/百度路径规划 API 生成 OD 时间矩阵，把 `haversine_km` 换成出行时间；
 - **换面数据**：用 GeoPandas 把社区面质心化，或直接做面到面 OD；
 - **空间自相关**：已内置 `spatial_autocorr.py`，可继续扩展不同 k、距离阈值、Queen 邻接权重，比较结果稳健性；
-- **空间回归**：已内置 `spatial_regression.py` 的 OLS/SLM/SEM；下一步可做 GWR、空间中介或政策冲击的准实验设计；
+- **空间回归**：已内置 `spatial_regression.py`（OLS/SLM/SEM）和 `gwr.py`（GWR）；下一步可做因果识别、政策冲击的准实验设计，或空间中介分析；
 - **方法扩展**：E2SFCA、3SFCA、Huff 模型；但先把手里的 2SFCA 假设、阈值和边界效应讲清楚，比堆模型更加分。
 
 当前仓库已经设置的描述和 topics：

@@ -7,8 +7,9 @@
     community_id, outpatient_utilization, elderly_share, income_index
 
 公式（仅用于演示）：
-    两周就诊率 = 0.22 + 0.30 * 可达性标准化 + 0.35 * 老年人口占比
-                 + 0.10 * 收入指数 + 空间相关扰动
+    可达性效应 = 0.10 + 0.35 × 市中心衰减权重
+    两周就诊率 = 0.15 + 可达性效应 × 可达性标准化 + 0.30 × 老年人口占比
+                 + 0.10 × 收入指数 + 空间相关扰动
 所有数值均为模拟，不对应真实社区。
 """
 
@@ -85,10 +86,13 @@ def main() -> None:
             sum(raw_noise[j] for j in neighbors[i]) / len(neighbors[i])
         )
         access_norm = point["access"] / max_access
+        # 让可达性效应随位置变化：市中心更强，边缘更弱，用于演示 GWR
+        centrality = math.exp(-((distance / (max_distance * 0.55)) ** 2))
+        access_effect = 0.10 + 0.35 * centrality
         utilization = (
-            0.20
-            + 0.30 * access_norm
-            + 0.35 * elderly[i]
+            0.15
+            + access_effect * access_norm
+            + 0.30 * elderly[i]
             + 0.10 * income[i]
             + spatial_noise
             + 0.015 * (distance / max_distance)

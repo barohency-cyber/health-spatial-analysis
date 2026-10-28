@@ -1,0 +1,2 @@
+# 核心 2SFCA 计算只用 Python 标准库；地图输出需要 matplotlib
+matplotlib>=3.8

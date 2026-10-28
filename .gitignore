@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 真实/敏感数据：只放在本地，不要提交
+raw_data/private/
+**/private/
+*.qgz
+
+# 临时输出
+tests/_tmp_output/
+output/_test*/

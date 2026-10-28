@@ -1,0 +1,2165 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.101701,
+          30.230211
+        ]
+      },
+      "properties": {
+        "community_id": "C001",
+        "name": "青禾街道01社区",
+        "population": 1280.0,
+        "access_per_1000": 0.0,
+        "facilities_in_catchment": 0,
+        "nearest_facility_km": 5.937548
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.101575,
+          30.243615
+        ]
+      },
+      "properties": {
+        "community_id": "C002",
+        "name": "青禾街道02社区",
+        "population": 1110.0,
+        "access_per_1000": 0.0,
+        "facilities_in_catchment": 0,
+        "nearest_facility_km": 5.264797
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.099997,
+          30.255378
+        ]
+      },
+      "properties": {
+        "community_id": "C003",
+        "name": "青禾街道03社区",
+        "population": 1130.0,
+        "access_per_1000": 0.0,
+        "facilities_in_catchment": 0,
+        "nearest_facility_km": 5.116642
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.099854,
+          30.26904
+        ]
+      },
+      "properties": {
+        "community_id": "C004",
+        "name": "青禾街道04社区",
+        "population": 1330.0,
+        "access_per_1000": 1.637692,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 4.753661
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.100306,
+          30.28433
+        ]
+      },
+      "properties": {
+        "community_id": "C005",
+        "name": "青禾街道05社区",
+        "population": 1330.0,
+        "access_per_1000": 1.637692,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 4.147588
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.09832,
+          30.297924
+        ]
+      },
+      "properties": {
+        "community_id": "C006",
+        "name": "青禾街道06社区",
+        "population": 1130.0,
+        "access_per_1000": 1.637692,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 4.379337
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.099666,
+          30.310663
+        ]
+      },
+      "properties": {
+        "community_id": "C007",
+        "name": "青禾街道07社区",
+        "population": 1120.0,
+        "access_per_1000": 4.694238,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 3.801381
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.09987,
+          30.323727
+        ]
+      },
+      "properties": {
+        "community_id": "C008",
+        "name": "青禾街道08社区",
+        "population": 1340.0,
+        "access_per_1000": 3.056546,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 2.647012
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.101534,
+          30.337837
+        ]
+      },
+      "properties": {
+        "community_id": "C009",
+        "name": "青禾街道09社区",
+        "population": 1270.0,
+        "access_per_1000": 3.056546,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 1.788377
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.098906,
+          30.348404
+        ]
+      },
+      "properties": {
+        "community_id": "C010",
+        "name": "青禾街道10社区",
+        "population": 1340.0,
+        "access_per_1000": 3.056546,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 2.229515
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.115448,
+          30.22876
+        ]
+      },
+      "properties": {
+        "community_id": "C011",
+        "name": "望江街道01社区",
+        "population": 1080.0,
+        "access_per_1000": 0.0,
+        "facilities_in_catchment": 0,
+        "nearest_facility_km": 5.007892
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.116855,
+          30.244093
+        ]
+      },
+      "properties": {
+        "community_id": "C012",
+        "name": "望江街道02社区",
+        "population": 1340.0,
+        "access_per_1000": 0.971873,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 3.896414
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.115975,
+          30.255719
+        ]
+      },
+      "properties": {
+        "community_id": "C013",
+        "name": "望江街道03社区",
+        "population": 1240.0,
+        "access_per_1000": 2.609565,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 3.587844
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.115703,
+          30.270683
+        ]
+      },
+      "properties": {
+        "community_id": "C014",
+        "name": "望江街道04社区",
+        "population": 1500.0,
+        "access_per_1000": 2.609565,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 3.388851
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.115037,
+          30.281893
+        ]
+      },
+      "properties": {
+        "community_id": "C015",
+        "name": "望江街道05社区",
+        "population": 1430.0,
+        "access_per_1000": 2.609565,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 2.83227
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.115694,
+          30.295285
+        ]
+      },
+      "properties": {
+        "community_id": "C016",
+        "name": "望江街道06社区",
+        "population": 1630.0,
+        "access_per_1000": 5.715979,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 2.686775
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.117448,
+          30.311626
+        ]
+      },
+      "properties": {
+        "community_id": "C017",
+        "name": "望江街道07社区",
+        "population": 1330.0,
+        "access_per_1000": 5.715979,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 3.164543
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.11468,
+          30.321727
+        ]
+      },
+      "properties": {
+        "community_id": "C018",
+        "name": "望江街道08社区",
+        "population": 1390.0,
+        "access_per_1000": 5.715979,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 2.095038
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.117101,
+          30.335538
+        ]
+      },
+      "properties": {
+        "community_id": "C019",
+        "name": "望江街道09社区",
+        "population": 1180.0,
+        "access_per_1000": 4.078286,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 0.568832
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.11759,
+          30.348249
+        ]
+      },
+      "properties": {
+        "community_id": "C020",
+        "name": "望江街道10社区",
+        "population": 1080.0,
+        "access_per_1000": 4.078286,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 0.945954
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.131655,
+          30.231207
+        ]
+      },
+      "properties": {
+        "community_id": "C021",
+        "name": "云岭街道01社区",
+        "population": 1340.0,
+        "access_per_1000": 0.971873,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 3.801909
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.133311,
+          30.243562
+        ]
+      },
+      "properties": {
+        "community_id": "C022",
+        "name": "云岭街道02社区",
+        "population": 1460.0,
+        "access_per_1000": 0.971873,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 2.630114
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.132603,
+          30.256832
+        ]
+      },
+      "properties": {
+        "community_id": "C023",
+        "name": "云岭街道03社区",
+        "population": 1840.0,
+        "access_per_1000": 2.609565,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 1.99047
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.133609,
+          30.268995
+        ]
+      },
+      "properties": {
+        "community_id": "C024",
+        "name": "云岭街道04社区",
+        "population": 2340.0,
+        "access_per_1000": 5.710057,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 2.113909
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.13329,
+          30.282089
+        ]
+      },
+      "properties": {
+        "community_id": "C025",
+        "name": "云岭街道05社区",
+        "population": 2630.0,
+        "access_per_1000": 6.731798,
+        "facilities_in_catchment": 4,
+        "nearest_facility_km": 1.281825
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.130756,
+          30.296303
+        ]
+      },
+      "properties": {
+        "community_id": "C026",
+        "name": "云岭街道06社区",
+        "population": 2710.0,
+        "access_per_1000": 11.629015,
+        "facilities_in_catchment": 6,
+        "nearest_facility_km": 1.36864
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.130634,
+          30.310327
+        ]
+      },
+      "properties": {
+        "community_id": "C027",
+        "name": "云岭街道07社区",
+        "population": 2200.0,
+        "access_per_1000": 7.55665,
+        "facilities_in_catchment": 4,
+        "nearest_facility_km": 2.401286
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.132611,
+          30.323455
+        ]
+      },
+      "properties": {
+        "community_id": "C028",
+        "name": "云岭街道08社区",
+        "population": 1530.0,
+        "access_per_1000": 5.715979,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 1.994371
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.133488,
+          30.336239
+        ]
+      },
+      "properties": {
+        "community_id": "C029",
+        "name": "云岭街道09社区",
+        "population": 1510.0,
+        "access_per_1000": 4.078286,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 1.360297
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.131476,
+          30.351129
+        ]
+      },
+      "properties": {
+        "community_id": "C030",
+        "name": "云岭街道10社区",
+        "population": 1150.0,
+        "access_per_1000": 4.078286,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 1.656539
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.149084,
+          30.229207
+        ]
+      },
+      "properties": {
+        "community_id": "C031",
+        "name": "南塘街道01社区",
+        "population": 1290.0,
+        "access_per_1000": 2.383577,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 3.444631
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.147139,
+          30.244478
+        ]
+      },
+      "properties": {
+        "community_id": "C032",
+        "name": "南塘街道02社区",
+        "population": 1680.0,
+        "access_per_1000": 2.383577,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 1.815461
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.146977,
+          30.255255
+        ]
+      },
+      "properties": {
+        "community_id": "C033",
+        "name": "南塘街道03社区",
+        "population": 2310.0,
+        "access_per_1000": 7.121762,
+        "facilities_in_catchment": 4,
+        "nearest_facility_km": 0.782965
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.146634,
+          30.270051
+        ]
+      },
+      "properties": {
+        "community_id": "C034",
+        "name": "南塘街道04社区",
+        "population": 4770.0,
+        "access_per_1000": 13.879674,
+        "facilities_in_catchment": 6,
+        "nearest_facility_km": 1.273921
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.146215,
+          30.285102
+        ]
+      },
+      "properties": {
+        "community_id": "C035",
+        "name": "南塘街道05社区",
+        "population": 4920.0,
+        "access_per_1000": 15.330381,
+        "facilities_in_catchment": 7,
+        "nearest_facility_km": 0.626034
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.14947,
+          30.295622
+        ]
+      },
+      "properties": {
+        "community_id": "C036",
+        "name": "南塘街道06社区",
+        "population": 6090.0,
+        "access_per_1000": 17.523685,
+        "facilities_in_catchment": 8,
+        "nearest_facility_km": 0.881299
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.14877,
+          30.311443
+        ]
+      },
+      "properties": {
+        "community_id": "C037",
+        "name": "南塘街道07社区",
+        "population": 4810.0,
+        "access_per_1000": 17.507835,
+        "facilities_in_catchment": 7,
+        "nearest_facility_km": 1.03451
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.148111,
+          30.324444
+        ]
+      },
+      "properties": {
+        "community_id": "C038",
+        "name": "南塘街道08社区",
+        "population": 2340.0,
+        "access_per_1000": 9.074389,
+        "facilities_in_catchment": 5,
+        "nearest_facility_km": 0.681464
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.147143,
+          30.337577
+        ]
+      },
+      "properties": {
+        "community_id": "C039",
+        "name": "南塘街道09社区",
+        "population": 1800.0,
+        "access_per_1000": 5.596025,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 2.03371
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.146664,
+          30.349933
+        ]
+      },
+      "properties": {
+        "community_id": "C040",
+        "name": "南塘街道10社区",
+        "population": 1280.0,
+        "access_per_1000": 5.596025,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 2.786921
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.164294,
+          30.230148
+        ]
+      },
+      "properties": {
+        "community_id": "C041",
+        "name": "北辰街道01社区",
+        "population": 1610.0,
+        "access_per_1000": 2.383577,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 3.021027
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.165595,
+          30.24236
+        ]
+      },
+      "properties": {
+        "community_id": "C042",
+        "name": "北辰街道02社区",
+        "population": 2090.0,
+        "access_per_1000": 5.48407,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 2.241713
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.165387,
+          30.257255
+        ]
+      },
+      "properties": {
+        "community_id": "C043",
+        "name": "北辰街道03社区",
+        "population": 5740.0,
+        "access_per_1000": 13.879674,
+        "facilities_in_catchment": 6,
+        "nearest_facility_km": 1.22825
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.164667,
+          30.269803
+        ]
+      },
+      "properties": {
+        "community_id": "C044",
+        "name": "北辰街道04社区",
+        "population": 8030.0,
+        "access_per_1000": 17.913649,
+        "facilities_in_catchment": 8,
+        "nearest_facility_km": 1.563236
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.164503,
+          30.281586
+        ]
+      },
+      "properties": {
+        "community_id": "C045",
+        "name": "北辰街道05社区",
+        "population": 11900.0,
+        "access_per_1000": 18.935389,
+        "facilities_in_catchment": 9,
+        "nearest_facility_km": 1.104938
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.165061,
+          30.295505
+        ]
+      },
+      "properties": {
+        "community_id": "C046",
+        "name": "北辰街道06社区",
+        "population": 12450.0,
+        "access_per_1000": 19.041423,
+        "facilities_in_catchment": 9,
+        "nearest_facility_km": 1.832553
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.163861,
+          30.310651
+        ]
+      },
+      "properties": {
+        "community_id": "C047",
+        "name": "北辰街道07社区",
+        "population": 7960.0,
+        "access_per_1000": 18.06955,
+        "facilities_in_catchment": 8,
+        "nearest_facility_km": 1.472278
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.162373,
+          30.323239
+        ]
+      },
+      "properties": {
+        "community_id": "C048",
+        "name": "北辰街道08社区",
+        "population": 3900.0,
+        "access_per_1000": 19.701138,
+        "facilities_in_catchment": 8,
+        "nearest_facility_km": 0.969073
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.16269,
+          30.335036
+        ]
+      },
+      "properties": {
+        "community_id": "C049",
+        "name": "北辰街道09社区",
+        "population": 2750.0,
+        "access_per_1000": 7.436697,
+        "facilities_in_catchment": 4,
+        "nearest_facility_km": 1.913192
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.163607,
+          30.349456
+        ]
+      },
+      "properties": {
+        "community_id": "C050",
+        "name": "北辰街道10社区",
+        "population": 1600.0,
+        "access_per_1000": 5.596025,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 3.040938
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.179992,
+          30.229694
+        ]
+      },
+      "properties": {
+        "community_id": "C051",
+        "name": "东港街道01社区",
+        "population": 1550.0,
+        "access_per_1000": 2.383577,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 2.176056
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.180043,
+          30.242513
+        ]
+      },
+      "properties": {
+        "community_id": "C052",
+        "name": "东港街道02社区",
+        "population": 2440.0,
+        "access_per_1000": 8.002994,
+        "facilities_in_catchment": 5,
+        "nearest_facility_km": 0.977994
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.181347,
+          30.255947
+        ]
+      },
+      "properties": {
+        "community_id": "C053",
+        "name": "东港街道03社区",
+        "population": 6660.0,
+        "access_per_1000": 13.335948,
+        "facilities_in_catchment": 6,
+        "nearest_facility_km": 1.090521
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.180985,
+          30.268886
+        ]
+      },
+      "properties": {
+        "community_id": "C054",
+        "name": "东港街道04社区",
+        "population": 10750.0,
+        "access_per_1000": 19.007614,
+        "facilities_in_catchment": 9,
+        "nearest_facility_km": 1.534778
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.181348,
+          30.282945
+        ]
+      },
+      "properties": {
+        "community_id": "C055",
+        "name": "东港街道05社区",
+        "population": 16620.0,
+        "access_per_1000": 20.029355,
+        "facilities_in_catchment": 10,
+        "nearest_facility_km": 0.524169
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.18028,
+          30.295248
+        ]
+      },
+      "properties": {
+        "community_id": "C056",
+        "name": "东港街道06社区",
+        "population": 17180.0,
+        "access_per_1000": 20.176497,
+        "facilities_in_catchment": 10,
+        "nearest_facility_km": 0.943364
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.181094,
+          30.308888
+        ]
+      },
+      "properties": {
+        "community_id": "C057",
+        "name": "东港街道07社区",
+        "population": 12310.0,
+        "access_per_1000": 19.204624,
+        "facilities_in_catchment": 9,
+        "nearest_facility_km": 0.550437
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.179395,
+          30.324192
+        ]
+      },
+      "properties": {
+        "community_id": "C058",
+        "name": "东港街道08社区",
+        "population": 5430.0,
+        "access_per_1000": 16.141974,
+        "facilities_in_catchment": 7,
+        "nearest_facility_km": 1.198284
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.179874,
+          30.336404
+        ]
+      },
+      "properties": {
+        "community_id": "C059",
+        "name": "东港街道09社区",
+        "population": 3090.0,
+        "access_per_1000": 7.708527,
+        "facilities_in_catchment": 5,
+        "nearest_facility_km": 0.92087
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.180811,
+          30.35041
+        ]
+      },
+      "properties": {
+        "community_id": "C060",
+        "name": "东港街道10社区",
+        "population": 1570.0,
+        "access_per_1000": 2.539479,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 2.160226
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.194408,
+          30.230194
+        ]
+      },
+      "properties": {
+        "community_id": "C061",
+        "name": "西林街道01社区",
+        "population": 1450.0,
+        "access_per_1000": 2.50567,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 2.073428
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.19545,
+          30.243125
+        ]
+      },
+      "properties": {
+        "community_id": "C062",
+        "name": "西林街道02社区",
+        "population": 2940.0,
+        "access_per_1000": 8.002994,
+        "facilities_in_catchment": 5,
+        "nearest_facility_km": 0.897765
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.195391,
+          30.255545
+        ]
+      },
+      "properties": {
+        "community_id": "C063",
+        "name": "西林街道03社区",
+        "population": 5920.0,
+        "access_per_1000": 15.529251,
+        "facilities_in_catchment": 7,
+        "nearest_facility_km": 1.099026
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.194668,
+          30.270128
+        ]
+      },
+      "properties": {
+        "community_id": "C064",
+        "name": "西林街道04社区",
+        "population": 13770.0,
+        "access_per_1000": 19.109269,
+        "facilities_in_catchment": 9,
+        "nearest_facility_km": 1.105145
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.195418,
+          30.28303
+        ]
+      },
+      "properties": {
+        "community_id": "C065",
+        "name": "西林街道05社区",
+        "population": 16380.0,
+        "access_per_1000": 20.244343,
+        "facilities_in_catchment": 10,
+        "nearest_facility_km": 0.341525
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.196309,
+          30.295678
+        ]
+      },
+      "properties": {
+        "community_id": "C066",
+        "name": "西林街道06社区",
+        "population": 17450.0,
+        "access_per_1000": 20.400244,
+        "facilities_in_catchment": 10,
+        "nearest_facility_km": 0.438453
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.196621,
+          30.311299
+        ]
+      },
+      "properties": {
+        "community_id": "C067",
+        "name": "西林街道07社区",
+        "population": 12820.0,
+        "access_per_1000": 19.306278,
+        "facilities_in_catchment": 9,
+        "nearest_facility_km": 1.513944
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.19546,
+          30.324007
+        ]
+      },
+      "properties": {
+        "community_id": "C068",
+        "name": "西林街道08社区",
+        "population": 6380.0,
+        "access_per_1000": 14.46644,
+        "facilities_in_catchment": 7,
+        "nearest_facility_km": 1.141308
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.195281,
+          30.336315
+        ]
+      },
+      "properties": {
+        "community_id": "C069",
+        "name": "西林街道09社区",
+        "population": 3180.0,
+        "access_per_1000": 7.708527,
+        "facilities_in_catchment": 5,
+        "nearest_facility_km": 0.847641
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.196554,
+          30.349317
+        ]
+      },
+      "properties": {
+        "community_id": "C070",
+        "name": "西林街道10社区",
+        "population": 1810.0,
+        "access_per_1000": 2.652812,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 2.093241
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.213117,
+          30.23085
+        ]
+      },
+      "properties": {
+        "community_id": "C071",
+        "name": "长桥街道01社区",
+        "population": 1540.0,
+        "access_per_1000": 5.372643,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 3.075467
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.21025,
+          30.241934
+        ]
+      },
+      "properties": {
+        "community_id": "C072",
+        "name": "长桥街道02社区",
+        "population": 2390.0,
+        "access_per_1000": 6.797601,
+        "facilities_in_catchment": 4,
+        "nearest_facility_km": 2.241224
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.212197,
+          30.258023
+        ]
+      },
+      "properties": {
+        "community_id": "C073",
+        "name": "长桥街道03社区",
+        "population": 4400.0,
+        "access_per_1000": 19.163697,
+        "facilities_in_catchment": 8,
+        "nearest_facility_km": 1.060611
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.211909,
+          30.269085
+        ]
+      },
+      "properties": {
+        "community_id": "C074",
+        "name": "长桥街道04社区",
+        "population": 8590.0,
+        "access_per_1000": 18.137396,
+        "facilities_in_catchment": 8,
+        "nearest_facility_km": 1.468035
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.212791,
+          30.282544
+        ]
+      },
+      "properties": {
+        "community_id": "C075",
+        "name": "长桥街道05社区",
+        "population": 11950.0,
+        "access_per_1000": 19.27247,
+        "facilities_in_catchment": 9,
+        "nearest_facility_km": 1.636961
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.213134,
+          30.297722
+        ]
+      },
+      "properties": {
+        "community_id": "C076",
+        "name": "长桥街道06社区",
+        "population": 11230.0,
+        "access_per_1000": 19.378504,
+        "facilities_in_catchment": 9,
+        "nearest_facility_km": 1.26134
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.212908,
+          30.310849
+        ]
+      },
+      "properties": {
+        "community_id": "C077",
+        "name": "长桥街道07社区",
+        "population": 8590.0,
+        "access_per_1000": 18.284538,
+        "facilities_in_catchment": 8,
+        "nearest_facility_km": 1.404936
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.212788,
+          30.322875
+        ]
+      },
+      "properties": {
+        "community_id": "C078",
+        "name": "长桥街道08社区",
+        "population": 4410.0,
+        "access_per_1000": 13.759088,
+        "facilities_in_catchment": 6,
+        "nearest_facility_km": 1.031007
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.210643,
+          30.336266
+        ]
+      },
+      "properties": {
+        "community_id": "C079",
+        "name": "长桥街道09社区",
+        "population": 2650.0,
+        "access_per_1000": 6.686787,
+        "facilities_in_catchment": 4,
+        "nearest_facility_km": 2.162864
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.213349,
+          30.349194
+        ]
+      },
+      "properties": {
+        "community_id": "C080",
+        "name": "长桥街道10社区",
+        "population": 1270.0,
+        "access_per_1000": 2.652812,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 3.094028
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.227278,
+          30.230298
+        ]
+      },
+      "properties": {
+        "community_id": "C081",
+        "name": "新安街道01社区",
+        "population": 1220.0,
+        "access_per_1000": 5.372643,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 2.962686
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.227766,
+          30.242707
+        ]
+      },
+      "properties": {
+        "community_id": "C082",
+        "name": "新安街道02社区",
+        "population": 1520.0,
+        "access_per_1000": 5.372643,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 1.976639
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.229702,
+          30.258159
+        ]
+      },
+      "properties": {
+        "community_id": "C083",
+        "name": "新安街道03社区",
+        "population": 2450.0,
+        "access_per_1000": 8.536947,
+        "facilities_in_catchment": 5,
+        "nearest_facility_km": 0.675464
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.229201,
+          30.2703
+        ]
+      },
+      "properties": {
+        "community_id": "C084",
+        "name": "新安街道04社区",
+        "population": 3880.0,
+        "access_per_1000": 16.063205,
+        "facilities_in_catchment": 7,
+        "nearest_facility_km": 1.290892
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.226492,
+          30.283055
+        ]
+      },
+      "properties": {
+        "community_id": "C085",
+        "name": "新安街道05社区",
+        "population": 6070.0,
+        "access_per_1000": 17.860765,
+        "facilities_in_catchment": 8,
+        "nearest_facility_km": 0.993406
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.22897,
+          30.296677
+        ]
+      },
+      "properties": {
+        "community_id": "C086",
+        "name": "新安街道06社区",
+        "population": 5730.0,
+        "access_per_1000": 14.760273,
+        "facilities_in_catchment": 7,
+        "nearest_facility_km": 0.837224
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.228972,
+          30.308653
+        ]
+      },
+      "properties": {
+        "community_id": "C087",
+        "name": "新安街道07社区",
+        "population": 4180.0,
+        "access_per_1000": 15.184046,
+        "facilities_in_catchment": 7,
+        "nearest_facility_km": 1.385854
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.227243,
+          30.324309
+        ]
+      },
+      "properties": {
+        "community_id": "C088",
+        "name": "新安街道08社区",
+        "population": 2820.0,
+        "access_per_1000": 8.426133,
+        "facilities_in_catchment": 5,
+        "nearest_facility_km": 0.628836
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.228701,
+          30.337208
+        ]
+      },
+      "properties": {
+        "community_id": "C089",
+        "name": "新安街道09社区",
+        "population": 1480.0,
+        "access_per_1000": 2.652812,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 1.990141
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.227476,
+          30.348214
+        ]
+      },
+      "properties": {
+        "community_id": "C090",
+        "name": "新安街道10社区",
+        "population": 1390.0,
+        "access_per_1000": 2.652812,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 3.166531
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.245753,
+          30.229287
+        ]
+      },
+      "properties": {
+        "community_id": "C091",
+        "name": "江湾街道01社区",
+        "population": 1110.0,
+        "access_per_1000": 3.960938,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 1.545355
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.24393,
+          30.24284
+        ]
+      },
+      "properties": {
+        "community_id": "C092",
+        "name": "江湾街道02社区",
+        "population": 1280.0,
+        "access_per_1000": 3.960938,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 1.201712
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.245068,
+          30.256103
+        ]
+      },
+      "properties": {
+        "community_id": "C093",
+        "name": "江湾街道03社区",
+        "population": 1780.0,
+        "access_per_1000": 5.700285,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 2.075774
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.245676,
+          30.268852
+        ]
+      },
+      "properties": {
+        "community_id": "C094",
+        "name": "江湾街道04社区",
+        "population": 2220.0,
+        "access_per_1000": 7.125243,
+        "facilities_in_catchment": 4,
+        "nearest_facility_km": 2.389913
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.242419,
+          30.283748
+        ]
+      },
+      "properties": {
+        "community_id": "C095",
+        "name": "江湾街道05社区",
+        "population": 2990.0,
+        "access_per_1000": 7.586647,
+        "facilities_in_catchment": 5,
+        "nearest_facility_km": 1.140711
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.242678,
+          30.295445
+        ]
+      },
+      "properties": {
+        "community_id": "C096",
+        "name": "江湾街道06社区",
+        "population": 2560.0,
+        "access_per_1000": 7.586647,
+        "facilities_in_catchment": 5,
+        "nearest_facility_km": 1.109057
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.243987,
+          30.309397
+        ]
+      },
+      "properties": {
+        "community_id": "C097",
+        "name": "江湾街道07社区",
+        "population": 1900.0,
+        "access_per_1000": 5.067723,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 2.334203
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.24293,
+          30.32389
+        ]
+      },
+      "properties": {
+        "community_id": "C098",
+        "name": "江湾街道08社区",
+        "population": 1850.0,
+        "access_per_1000": 2.87442,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 1.961251
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.243079,
+          30.336628
+        ]
+      },
+      "properties": {
+        "community_id": "C099",
+        "name": "江湾街道09社区",
+        "population": 1370.0,
+        "access_per_1000": 1.135074,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 2.670668
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.242439,
+          30.350647
+        ]
+      },
+      "properties": {
+        "community_id": "C100",
+        "name": "江湾街道10社区",
+        "population": 1220.0,
+        "access_per_1000": 1.135074,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 3.885028
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.261038,
+          30.231723
+        ]
+      },
+      "properties": {
+        "community_id": "C101",
+        "name": "凤凰街道01社区",
+        "population": 1180.0,
+        "access_per_1000": 3.960938,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 1.039862
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.260885,
+          30.242534
+        ]
+      },
+      "properties": {
+        "community_id": "C102",
+        "name": "凤凰街道02社区",
+        "population": 1090.0,
+        "access_per_1000": 3.960938,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 0.547362
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.259873,
+          30.255837
+        ]
+      },
+      "properties": {
+        "community_id": "C103",
+        "name": "凤凰街道03社区",
+        "population": 1290.0,
+        "access_per_1000": 5.700285,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 1.799864
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.261372,
+          30.268804
+        ]
+      },
+      "properties": {
+        "community_id": "C104",
+        "name": "凤凰街道04社区",
+        "population": 1530.0,
+        "access_per_1000": 5.700285,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 3.244159
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.261265,
+          30.282398
+        ]
+      },
+      "properties": {
+        "community_id": "C105",
+        "name": "凤凰街道05社区",
+        "population": 1300.0,
+        "access_per_1000": 5.700285,
+        "facilities_in_catchment": 3,
+        "nearest_facility_km": 2.842567
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.261273,
+          30.296743
+        ]
+      },
+      "properties": {
+        "community_id": "C106",
+        "name": "凤凰街道06社区",
+        "population": 1400.0,
+        "access_per_1000": 2.87442,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 2.816189
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.260115,
+          30.31108
+        ]
+      },
+      "properties": {
+        "community_id": "C107",
+        "name": "凤凰街道07社区",
+        "population": 1350.0,
+        "access_per_1000": 2.87442,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 3.50297
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.260211,
+          30.325002
+        ]
+      },
+      "properties": {
+        "community_id": "C108",
+        "name": "凤凰街道08社区",
+        "population": 1350.0,
+        "access_per_1000": 2.87442,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 3.614682
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.26106,
+          30.335707
+        ]
+      },
+      "properties": {
+        "community_id": "C109",
+        "name": "凤凰街道09社区",
+        "population": 1360.0,
+        "access_per_1000": 1.135074,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 4.048983
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.260928,
+          30.349436
+        ]
+      },
+      "properties": {
+        "community_id": "C110",
+        "name": "凤凰街道10社区",
+        "population": 1050.0,
+        "access_per_1000": 1.135074,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 4.895206
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.274233,
+          30.229305
+        ]
+      },
+      "properties": {
+        "community_id": "C111",
+        "name": "石湖街道01社区",
+        "population": 1160.0,
+        "access_per_1000": 2.866972,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 2.117187
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.275313,
+          30.243297
+        ]
+      },
+      "properties": {
+        "community_id": "C112",
+        "name": "石湖街道02社区",
+        "population": 1160.0,
+        "access_per_1000": 2.866972,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 1.891129
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.276292,
+          30.255104
+        ]
+      },
+      "properties": {
+        "community_id": "C113",
+        "name": "石湖街道03社区",
+        "population": 1330.0,
+        "access_per_1000": 2.866972,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 2.572935
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.277035,
+          30.269968
+        ]
+      },
+      "properties": {
+        "community_id": "C114",
+        "name": "石湖街道04社区",
+        "population": 1050.0,
+        "access_per_1000": 4.606319,
+        "facilities_in_catchment": 2,
+        "nearest_facility_km": 3.896947
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.274835,
+          30.282536
+        ]
+      },
+      "properties": {
+        "community_id": "C115",
+        "name": "石湖街道05社区",
+        "population": 1260.0,
+        "access_per_1000": 1.739347,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 4.101791
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.275306,
+          30.296282
+        ]
+      },
+      "properties": {
+        "community_id": "C116",
+        "name": "石湖街道06社区",
+        "population": 1270.0,
+        "access_per_1000": 1.739347,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 4.121512
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.276204,
+          30.309376
+        ]
+      },
+      "properties": {
+        "community_id": "C117",
+        "name": "石湖街道07社区",
+        "population": 1160.0,
+        "access_per_1000": 1.739347,
+        "facilities_in_catchment": 1,
+        "nearest_facility_km": 4.674015
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.277532,
+          30.324263
+        ]
+      },
+      "properties": {
+        "community_id": "C118",
+        "name": "石湖街道08社区",
+        "population": 1340.0,
+        "access_per_1000": 0.0,
+        "facilities_in_catchment": 0,
+        "nearest_facility_km": 5.255602
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.274731,
+          30.338241
+        ]
+      },
+      "properties": {
+        "community_id": "C119",
+        "name": "石湖街道09社区",
+        "population": 1330.0,
+        "access_per_1000": 0.0,
+        "facilities_in_catchment": 0,
+        "nearest_facility_km": 5.363304
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.27506,
+          30.349368
+        ]
+      },
+      "properties": {
+        "community_id": "C120",
+        "name": "石湖街道10社区",
+        "population": 1350.0,
+        "access_per_1000": 0.0,
+        "facilities_in_catchment": 0,
+        "nearest_facility_km": 5.96881
+      }
+    }
+  ]
+}

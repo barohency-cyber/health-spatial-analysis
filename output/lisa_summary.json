@@ -1,0 +1,26 @@
+{
+  "method": "Global and local Moran's I (LISA)",
+  "variable": "access_per_1000",
+  "n": 120,
+  "k": 6,
+  "weights": {
+    "type": "k nearest neighbors",
+    "row_standardized": true
+  },
+  "permutations": 999,
+  "seed": 20261028,
+  "alpha": 0.05,
+  "global_i": 0.7965157497266597,
+  "expected_i": -0.008403361344537815,
+  "z_score": 16.24082130116741,
+  "p_normality": 2.594274691769873e-59,
+  "p_permutation": 0.001,
+  "cluster_counts": {
+    "High-High": 20,
+    "Low-Low": 12,
+    "High-Low": 0,
+    "Low-High": 0,
+    "Not Significant": 88
+  },
+  "note": "LISA 聚类基于局部 Moran's I 的条件置换 p 值，经 Benjamini-Hochberg FDR 校正；k 近邻权重用直线距离构造，正式研究应做不同 k 和距离阈值的敏感性分析。"
+}

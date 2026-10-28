@@ -26,5 +26,8 @@ jobs:
       - name: Run CLI without map
         run: python code/two_step_fca.py --no-map --output-dir output/ci
 
+      - name: Run LISA without map
+        run: python code/spatial_autocorr.py --permutations 199 --no-map --output-dir output/ci
+
       - name: Generate interactive map
         run: python code/make_web_map.py --output docs/index.html

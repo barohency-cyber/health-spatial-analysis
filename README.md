@@ -5,7 +5,7 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 面向 **卫生事业管理 / 公共卫生 / 数字治理** 方向的 2SFCA（两步移动搜索法）最小项目：
-不用装 ArcGIS，不依赖 GeoPandas，准备好两张 CSV 就能算；算完直接出 CSV、GeoJSON、论文图和可交互网页地图。
+不用装 ArcGIS，不依赖 GeoPandas，准备好两张 CSV 就能算；算完直接出 CSV、GeoJSON、论文图、可交互网页地图和 LISA 聚类图。
 
 > 仓库内全部为**模拟数据**：虚构的“临江市”、120 个社区、15 家医疗机构。
 > 机构名、位置、人口、床位均不对应真实地点，可直接公开上传 GitHub。
@@ -44,7 +44,7 @@ python code/two_step_fca.py --no-map
 python -m unittest discover -s tests -v
 ```
 
-每次 push 后 GitHub Actions 会自动跑单元测试、无图 CLI 和网页地图生成，配置在 [`.github/workflows/tests.yml`](.github/workflows/tests.yml)。
+每次 push 后 GitHub Actions 会自动跑单元测试、无图 CLI、LISA 和网页地图生成，配置在 [`.github/workflows/tests.yml`](.github/workflows/tests.yml)。
 
 ---
 
@@ -169,6 +169,11 @@ python code/two_step_fca.py --threshold-km 10 --output-dir output/d10
 | `output/accessibility_summary.json` | 覆盖人口、均值、中位数、P10/P90 等汇总指标 |
 | `output/accessibility_map.png` | 快速检查用图；正式论文图建议在 QGIS 里重做 |
 | `output/accessibility_map.svg` | 矢量图，可进 Illustrator / Inkscape 调整 |
+| `output/lisa.csv` | 每个社区的局部 Moran's I、FDR q 值和 LISA 聚类类型 |
+| `output/lisa.geojson` | LISA 结果空间数据，可拖进 QGIS 做聚类图 |
+| `output/lisa_summary.json` | 全局 Moran's I、置换检验、各类聚类数量 |
+| `output/lisa_map.png` | LISA 高低值聚类图 |
+| `output/lisa_map.svg` | LISA 矢量图，便于排版修改 |
 
 字段解释：
 
@@ -219,6 +224,44 @@ P90/P10 约为 7.6。高值区集中在市中心，低值区和 0 值区主要�
 - 不要只报“平均每千人床位”；
 - 要同时看中位数、P10/P90、覆盖率和空间分布；
 - 平均值相同，不代表资源分配公平。
+
+### 空间格局：Moran's I 与 LISA
+
+可达性算完后，下一个问题是：**高值区和低值区是随机散落，还是成片聚集？**
+
+```powershell
+python code/spatial_autocorr.py
+```
+
+默认参数：`k = 6` 个最近邻、行标准化空间权重、999 次随机置换、FDR 校正 `q ≤ 0.05`。
+
+示例结果：
+
+```text
+全局 Moran's I = 0.797，置换 p = 0.001
+高-高聚集 20 个，低-低聚集 12 个，高-低/低-高异常 0 个，不显著 88 个
+```
+
+怎么读：
+
+- **全局 Moran's I > 0 且 p 很小**：可达性整体呈空间聚集，不是随机分布；
+- **高-高（High-High）**：高可达性社区被高可达性邻居包围，示例中集中在市中心；
+- **低-低（Low-Low）**：低可达性社区连片，示例中出现在东北、西南边缘；
+- **高-低 / 低-高**：局部异常值，表示该社区与邻居“反差大”；
+- **不显著**：在控制 FDR 后，没有足够证据认为它属于某种聚集。
+
+![LISA 聚类图](output/lisa_map.png)
+
+实现细节：
+
+- 全局：`I = (n / S0) × ΣΣ w_ij z_i z_j / Σ z_i²`，`z_i` 为可达性对均值的偏离；
+- 局部：`I_i = z_i × Σ w_ij z_j / m2`，聚类类型由 `z_i` 和空间滞后 `Σ w_ij z_j` 的符号决定；
+- 空间权重用 k 近邻而不是行政邻接，适合社区/网格这类不规则点位；
+- 局部显著性用条件置换，最后做 Benjamini-Hochberg FDR，避免“检验 120 次挑显著”；
+- `lisa.csv` 里的 `local_i` 是局部 Moran's I，`cluster` 才是最终聚类类型；
+- 权重定义、k 值、距离口径都会影响结果，正式论文要做敏感性分析。
+
+局限：LISA 的“显著”只说明空间聚集，不说明因果；k 近邻和直线距离会忽略路网、行政边界和空间异质性。置换次数（99/199/999）和随机种子也会让边缘个案略有变化，论文里应写明参数并做稳健性比较。不要把它写成“高可达性导致某健康结果”。
 
 ---
 
@@ -299,6 +342,7 @@ P90/P10 约为 7.6。高值区集中在市中心，低值区和 0 值区主要�
 │   └── workflows/tests.yml   # push 自动跑测试和网页生成
 ├── code/
 │   ├── two_step_fca.py       # 2SFCA 核心 + CSV/GeoJSON/地图输出
+│   ├── spatial_autocorr.py   # 全局 Moran's I + 局部 LISA
 │   ├── make_web_map.py       # 生成 docs/index.html 交互地图
 │   └── make_demo_data.py     # 重新生成模拟数据
 ├── data/
@@ -312,9 +356,15 @@ P90/P10 约为 7.6。高值区集中在市中心，低值区和 0 值区主要�
 │   ├── accessibility.geojson
 │   ├── accessibility_summary.json
 │   ├── accessibility_map.png
-│   └── accessibility_map.svg
+│   ├── accessibility_map.svg
+│   ├── lisa.csv
+│   ├── lisa.geojson
+│   ├── lisa_summary.json
+│   ├── lisa_map.png
+│   └── lisa_map.svg
 ├── tests/
 │   ├── test_two_step_fca.py  # 手算例子校验公式
+│   ├── test_spatial_autocorr.py
 │   └── test_web_map.py       # 校验网页地图生成
 ├── CITATION.cff
 ├── LICENSE
@@ -335,7 +385,7 @@ python code/two_step_fca.py
 
 - **换路网**：用 QGIS 的 ORS Tools、OSRM，或高德/百度路径规划 API 生成 OD 时间矩阵，把 `haversine_km` 换成出行时间；
 - **换面数据**：用 GeoPandas 把社区面质心化，或直接做面到面 OD；
-- **空间自相关**：用 PySAL/esda 对 `access_per_1000` 做全局/局部 Moran's I，识别高-高、低-低聚集；
+- **空间自相关**：已内置 `spatial_autocorr.py`，可继续扩展不同 k、距离阈值、Queen 邻接权重，比较结果稳健性；
 - **空间回归**：以可达性为自变量，做 SLM/SEM，解释医保利用或健康结果；
 - **方法扩展**：E2SFCA、3SFCA、Huff 模型；但先把手里的 2SFCA 假设、阈值和边界效应讲清楚，比堆模型更加分。
 

@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "如果这个项目对你的课程论文或研究有帮助，可以引用本仓库。"
+title: "health-spatial-analysis: 2SFCA 医疗资源空间可达性示例"
+type: software
+authors:
+  - name: "barohency-cyber"
+repository-code: "https://github.com/barohency-cyber/health-spatial-analysis"
+url: "https://github.com/barohency-cyber/health-spatial-analysis"
+abstract: "面向卫生事业管理与公共卫生的 2SFCA 极简实现，包含模拟数据、QGIS 出图说明和 Leaflet 交互地图。"
+keywords:
+  - 2SFCA
+  - health GIS
+  - healthcare accessibility
+  - public health
+  - spatial analysis
+license: MIT
+version: 1.1.0
+date-released: 2026-10-28

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>医疗资源空间可达性 · 2SFCA</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  html, body { height: 100%; margin: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; color: #17212b; }
+  #map { height: 100%; width: 100%; background: #eef2f6; }
+  .panel { position: fixed; z-index: 1000; background: rgba(255,255,255,.96);
+           border: 1px solid #d0d7de; border-radius: 10px;
+           box-shadow: 0 3px 14px rgba(0,0,0,.10); }
+  .title-panel { top: 14px; left: 52px; max-width: min(390px, calc(100vw - 76px)); padding: 12px 15px; }
+  .title { font-size: 17px; font-weight: 800; line-height: 1.35; }
+  .subtitle { font-size: 12px; color: #5b6773; margin-top: 4px; }
+  .hint { font-size: 11px; color: #8a949e; margin-top: 6px; }
+  .legend-panel { bottom: 24px; left: 24px; padding: 10px 12px; font-size: 12px; line-height: 1.5; }
+  .legend-title { font-weight: 700; margin-bottom: 5px; }
+  .legend-row { display: flex; align-items: center; gap: 7px; margin: 3px 0; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex: 0 0 auto; }
+  .hospital-symbol { color: #8b1a1a; width: 11px; text-align: center; font-size: 14px; line-height: 11px; }
+  .legend-note { color: #8a949e; font-size: 11px; margin-top: 6px; }
+  .popup { font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif; min-width: 190px; }
+  .popup-title { font-size: 14px; font-weight: 700; color: #17212b; }
+  .popup-id { font-size: 11px; color: #8a949e; margin-bottom: 5px; }
+  .popup-body { font-size: 12px; line-height: 1.7; }
+  .hospital-pin { width: 22px; height: 22px; border-radius: 50%; background: #8b1a1a; color: #fff;
+                  border: 2px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,.35);
+                  display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+  .leaflet-control-layers { border-radius: 8px; }
+  .grid-label { background: transparent; color: #7b8794; font-size: 10px; white-space: nowrap;
+                text-shadow: 0 0 3px #fff, 0 0 3px #fff; }
+  @media (max-width: 640px) {
+    .title-panel { left: 52px; right: 10px; max-width: none; padding: 9px 11px; }
+    .title { font-size: 14px; }
+    .subtitle, .hint { font-size: 10px; }
+    .legend-panel { bottom: 12px; left: 12px; padding: 8px 10px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+    <div class="panel title-panel">
+      <div class="title">医疗资源空间可达性 · 2SFCA</div>
+      <div class="subtitle">直线距离 5.0 km · 二值衰减 · 模拟数据</div>
+      <div class="subtitle">覆盖人口 98.0% · 每千人床位中位数 17.86</div>
+      <div class="hint">120 个社区 · 15 家机构 · 点击圆点查看指标</div>
+    </div>
+    
+<div class="panel legend-panel"><div class="legend-title">每千人床位</div><div class="legend-row"><span class="dot" style="background:#d73027"></span><span>0（阈值内无机构）</span></div><div class="legend-row"><span class="dot" style="background:#c6dbef"></span><span>0.0–2.6</span></div><div class="legend-row"><span class="dot" style="background:#9ecae1"></span><span>2.6–4.5</span></div><div class="legend-row"><span class="dot" style="background:#6baed6"></span><span>4.5–7.1</span></div><div class="legend-row"><span class="dot" style="background:#3182bd"></span><span>7.1–15.8</span></div><div class="legend-row"><span class="dot" style="background:#08519c"></span><span>15.8–20.4</span></div><div class="legend-row"><span class="hospital-symbol">✚</span><span>医疗机构</span></div><div class="legend-note">圆点大小 ≈ 需求人口</div></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const DATA = {"records":[{"id":"C001","name":"青禾街道01社区","lon":120.101701,"lat":30.230211,"population":1280.0,"access":0.0,"facilities":0,"nearest":5.937548,"color":"#d73027"},{"id":"C002","name":"青禾街道02社区","lon":120.101575,"lat":30.243615,"population":1110.0,"access":0.0,"facilities":0,"nearest":5.264797,"color":"#d73027"},{"id":"C003","name":"青禾街道03社区","lon":120.099997,"lat":30.255378,"population":1130.0,"access":0.0,"facilities":0,"nearest":5.116642,"color":"#d73027"},{"id":"C004","name":"青禾街道04社区","lon":120.099854,"lat":30.26904,"population":1330.0,"access":1.637692,"facilities":1,"nearest":4.753661,"color":"#c6dbef"},{"id":"C005","name":"青禾街道05社区","lon":120.100306,"lat":30.28433,"population":1330.0,"access":1.637692,"facilities":1,"nearest":4.147588,"color":"#c6dbef"},{"id":"C006","name":"青禾街道06社区","lon":120.09832,"lat":30.297924,"population":1130.0,"access":1.637692,"facilities":1,"nearest":4.379337,"color":"#c6dbef"},{"id":"C007","name":"青禾街道07社区","lon":120.099666,"lat":30.310663,"population":1120.0,"access":4.694238,"facilities":2,"nearest":3.801381,"color":"#6baed6"},{"id":"C008","name":"青禾街道08社区","lon":120.09987,"lat":30.323727,"population":1340.0,"access":3.056546,"facilities":1,"nearest":2.647012,"color":"#9ecae1"},{"id":"C009","name":"青禾街道09社区","lon":120.101534,"lat":30.337837,"population":1270.0,"access":3.056546,"facilities":1,"nearest":1.788377,"color":"#9ecae1"},{"id":"C010","name":"青禾街道10社区","lon":120.098906,"lat":30.348404,"population":1340.0,"access":3.056546,"facilities":1,"nearest":2.229515,"color":"#9ecae1"},{"id":"C011","name":"望江街道01社区","lon":120.115448,"lat":30.22876,"population":1080.0,"access":0.0,"facilities":0,"nearest":5.007892,"color":"#d73027"},{"id":"C012","name":"望江街道02社区","lon":120.116855,"lat":30.244093,"population":1340.0,"access":0.971873,"facilities":1,"nearest":3.896414,"color":"#c6dbef"},{"id":"C013","name":"望江街道03社区","lon":120.115975,"lat":30.255719,"population":1240.0,"access":2.609565,"facilities":2,"nearest":3.587844,"color":"#c6dbef"},{"id":"C014","name":"望江街道04社区","lon":120.115703,"lat":30.270683,"population":1500.0,"access":2.609565,"facilities":2,"nearest":3.388851,"color":"#c6dbef"},{"id":"C015","name":"望江街道05社区","lon":120.115037,"lat":30.281893,"population":1430.0,"access":2.609565,"facilities":2,"nearest":2.83227,"color":"#c6dbef"},{"id":"C016","name":"望江街道06社区","lon":120.115694,"lat":30.295285,"population":1630.0,"access":5.715979,"facilities":3,"nearest":2.686775,"color":"#6baed6"},{"id":"C017","name":"望江街道07社区","lon":120.117448,"lat":30.311626,"population":1330.0,"access":5.715979,"facilities":3,"nearest":3.164543,"color":"#6baed6"},{"id":"C018","name":"望江街道08社区","lon":120.11468,"lat":30.321727,"population":1390.0,"access":5.715979,"facilities":3,"nearest":2.095038,"color":"#6baed6"},{"id":"C019","name":"望江街道09社区","lon":120.117101,"lat":30.335538,"population":1180.0,"access":4.078286,"facilities":2,"nearest":0.568832,"color":"#9ecae1"},{"id":"C020","name":"望江街道10社区","lon":120.11759,"lat":30.348249,"population":1080.0,"access":4.078286,"facilities":2,"nearest":0.945954,"color":"#9ecae1"},{"id":"C021","name":"云岭街道01社区","lon":120.131655,"lat":30.231207,"population":1340.0,"access":0.971873,"facilities":1,"nearest":3.801909,"color":"#c6dbef"},{"id":"C022","name":"云岭街道02社区","lon":120.133311,"lat":30.243562,"population":1460.0,"access":0.971873,"facilities":1,"nearest":2.630114,"color":"#c6dbef"},{"id":"C023","name":"云岭街道03社区","lon":120.132603,"lat":30.256832,"population":1840.0,"access":2.609565,"facilities":2,"nearest":1.99047,"color":"#c6dbef"},{"id":"C024","name":"云岭街道04社区","lon":120.133609,"lat":30.268995,"population":2340.0,"access":5.710057,"facilities":3,"nearest":2.113909,"color":"#6baed6"},{"id":"C025","name":"云岭街道05社区","lon":120.13329,"lat":30.282089,"population":2630.0,"access":6.731798,"facilities":4,"nearest":1.281825,"color":"#6baed6"},{"id":"C026","name":"云岭街道06社区","lon":120.130756,"lat":30.296303,"population":2710.0,"access":11.629015,"facilities":6,"nearest":1.36864,"color":"#3182bd"},{"id":"C027","name":"云岭街道07社区","lon":120.130634,"lat":30.310327,"population":2200.0,"access":7.55665,"facilities":4,"nearest":2.401286,"color":"#3182bd"},{"id":"C028","name":"云岭街道08社区","lon":120.132611,"lat":30.323455,"population":1530.0,"access":5.715979,"facilities":3,"nearest":1.994371,"color":"#6baed6"},{"id":"C029","name":"云岭街道09社区","lon":120.133488,"lat":30.336239,"population":1510.0,"access":4.078286,"facilities":2,"nearest":1.360297,"color":"#9ecae1"},{"id":"C030","name":"云岭街道10社区","lon":120.131476,"lat":30.351129,"population":1150.0,"access":4.078286,"facilities":2,"nearest":1.656539,"color":"#9ecae1"},{"id":"C031","name":"南塘街道01社区","lon":120.149084,"lat":30.229207,"population":1290.0,"access":2.383577,"facilities":2,"nearest":3.444631,"color":"#c6dbef"},{"id":"C032","name":"南塘街道02社区","lon":120.147139,"lat":30.244478,"population":1680.0,"access":2.383577,"facilities":2,"nearest":1.815461,"color":"#c6dbef"},{"id":"C033","name":"南塘街道03社区","lon":120.146977,"lat":30.255255,"population":2310.0,"access":7.121762,"facilities":4,"nearest":0.782965,"color":"#6baed6"},{"id":"C034","name":"南塘街道04社区","lon":120.146634,"lat":30.270051,"population":4770.0,"access":13.879674,"facilities":6,"nearest":1.273921,"color":"#3182bd"},{"id":"C035","name":"南塘街道05社区","lon":120.146215,"lat":30.285102,"population":4920.0,"access":15.330381,"facilities":7,"nearest":0.626034,"color":"#3182bd"},{"id":"C036","name":"南塘街道06社区","lon":120.14947,"lat":30.295622,"population":6090.0,"access":17.523685,"facilities":8,"nearest":0.881299,"color":"#08519c"},{"id":"C037","name":"南塘街道07社区","lon":120.14877,"lat":30.311443,"population":4810.0,"access":17.507835,"facilities":7,"nearest":1.03451,"color":"#08519c"},{"id":"C038","name":"南塘街道08社区","lon":120.148111,"lat":30.324444,"population":2340.0,"access":9.074389,"facilities":5,"nearest":0.681464,"color":"#3182bd"},{"id":"C039","name":"南塘街道09社区","lon":120.147143,"lat":30.337577,"population":1800.0,"access":5.596025,"facilities":3,"nearest":2.03371,"color":"#6baed6"},{"id":"C040","name":"南塘街道10社区","lon":120.146664,"lat":30.349933,"population":1280.0,"access":5.596025,"facilities":3,"nearest":2.786921,"color":"#6baed6"},{"id":"C041","name":"北辰街道01社区","lon":120.164294,"lat":30.230148,"population":1610.0,"access":2.383577,"facilities":2,"nearest":3.021027,"color":"#c6dbef"},{"id":"C042","name":"北辰街道02社区","lon":120.165595,"lat":30.24236,"population":2090.0,"access":5.48407,"facilities":3,"nearest":2.241713,"color":"#6baed6"},{"id":"C043","name":"北辰街道03社区","lon":120.165387,"lat":30.257255,"population":5740.0,"access":13.879674,"facilities":6,"nearest":1.22825,"color":"#3182bd"},{"id":"C044","name":"北辰街道04社区","lon":120.164667,"lat":30.269803,"population":8030.0,"access":17.913649,"facilities":8,"nearest":1.563236,"color":"#08519c"},{"id":"C045","name":"北辰街道05社区","lon":120.164503,"lat":30.281586,"population":11900.0,"access":18.935389,"facilities":9,"nearest":1.104938,"color":"#08519c"},{"id":"C046","name":"北辰街道06社区","lon":120.165061,"lat":30.295505,"population":12450.0,"access":19.041423,"facilities":9,"nearest":1.832553,"color":"#08519c"},{"id":"C047","name":"北辰街道07社区","lon":120.163861,"lat":30.310651,"population":7960.0,"access":18.06955,"facilities":8,"nearest":1.472278,"color":"#08519c"},{"id":"C048","name":"北辰街道08社区","lon":120.162373,"lat":30.323239,"population":3900.0,"access":19.701138,"facilities":8,"nearest":0.969073,"color":"#08519c"},{"id":"C049","name":"北辰街道09社区","lon":120.16269,"lat":30.335036,"population":2750.0,"access":7.436697,"facilities":4,"nearest":1.913192,"color":"#3182bd"},{"id":"C050","name":"北辰街道10社区","lon":120.163607,"lat":30.349456,"population":1600.0,"access":5.596025,"facilities":3,"nearest":3.040938,"color":"#6baed6"},{"id":"C051","name":"东港街道01社区","lon":120.179992,"lat":30.229694,"population":1550.0,"access":2.383577,"facilities":2,"nearest":2.176056,"color":"#c6dbef"},{"id":"C052","name":"东港街道02社区","lon":120.180043,"lat":30.242513,"population":2440.0,"access":8.002994,"facilities":5,"nearest":0.977994,"color":"#3182bd"},{"id":"C053","name":"东港街道03社区","lon":120.181347,"lat":30.255947,"population":6660.0,"access":13.335948,"facilities":6,"nearest":1.090521,"color":"#3182bd"},{"id":"C054","name":"东港街道04社区","lon":120.180985,"lat":30.268886,"population":10750.0,"access":19.007614,"facilities":9,"nearest":1.534778,"color":"#08519c"},{"id":"C055","name":"东港街道05社区","lon":120.181348,"lat":30.282945,"population":16620.0,"access":20.029355,"facilities":10,"nearest":0.524169,"color":"#08519c"},{"id":"C056","name":"东港街道06社区","lon":120.18028,"lat":30.295248,"population":17180.0,"access":20.176497,"facilities":10,"nearest":0.943364,"color":"#08519c"},{"id":"C057","name":"东港街道07社区","lon":120.181094,"lat":30.308888,"population":12310.0,"access":19.204624,"facilities":9,"nearest":0.550437,"color":"#08519c"},{"id":"C058","name":"东港街道08社区","lon":120.179395,"lat":30.324192,"population":5430.0,"access":16.141974,"facilities":7,"nearest":1.198284,"color":"#08519c"},{"id":"C059","name":"东港街道09社区","lon":120.179874,"lat":30.336404,"population":3090.0,"access":7.708527,"facilities":5,"nearest":0.92087,"color":"#3182bd"},{"id":"C060","name":"东港街道10社区","lon":120.180811,"lat":30.35041,"population":1570.0,"access":2.539479,"facilities":2,"nearest":2.160226,"color":"#c6dbef"},{"id":"C061","name":"西林街道01社区","lon":120.194408,"lat":30.230194,"population":1450.0,"access":2.50567,"facilities":2,"nearest":2.073428,"color":"#c6dbef"},{"id":"C062","name":"西林街道02社区","lon":120.19545,"lat":30.243125,"population":2940.0,"access":8.002994,"facilities":5,"nearest":0.897765,"color":"#3182bd"},{"id":"C063","name":"西林街道03社区","lon":120.195391,"lat":30.255545,"population":5920.0,"access":15.529251,"facilities":7,"nearest":1.099026,"color":"#3182bd"},{"id":"C064","name":"西林街道04社区","lon":120.194668,"lat":30.270128,"population":13770.0,"access":19.109269,"facilities":9,"nearest":1.105145,"color":"#08519c"},{"id":"C065","name":"西林街道05社区","lon":120.195418,"lat":30.28303,"population":16380.0,"access":20.244343,"facilities":10,"nearest":0.341525,"color":"#08519c"},{"id":"C066","name":"西林街道06社区","lon":120.196309,"lat":30.295678,"population":17450.0,"access":20.400244,"facilities":10,"nearest":0.438453,"color":"#08519c"},{"id":"C067","name":"西林街道07社区","lon":120.196621,"lat":30.311299,"population":12820.0,"access":19.306278,"facilities":9,"nearest":1.513944,"color":"#08519c"},{"id":"C068","name":"西林街道08社区","lon":120.19546,"lat":30.324007,"population":6380.0,"access":14.46644,"facilities":7,"nearest":1.141308,"color":"#3182bd"},{"id":"C069","name":"西林街道09社区","lon":120.195281,"lat":30.336315,"population":3180.0,"access":7.708527,"facilities":5,"nearest":0.847641,"color":"#3182bd"},{"id":"C070","name":"西林街道10社区","lon":120.196554,"lat":30.349317,"population":1810.0,"access":2.652812,"facilities":2,"nearest":2.093241,"color":"#9ecae1"},{"id":"C071","name":"长桥街道01社区","lon":120.213117,"lat":30.23085,"population":1540.0,"access":5.372643,"facilities":3,"nearest":3.075467,"color":"#6baed6"},{"id":"C072","name":"长桥街道02社区","lon":120.21025,"lat":30.241934,"population":2390.0,"access":6.797601,"facilities":4,"nearest":2.241224,"color":"#6baed6"},{"id":"C073","name":"长桥街道03社区","lon":120.212197,"lat":30.258023,"population":4400.0,"access":19.163697,"facilities":8,"nearest":1.060611,"color":"#08519c"},{"id":"C074","name":"长桥街道04社区","lon":120.211909,"lat":30.269085,"population":8590.0,"access":18.137396,"facilities":8,"nearest":1.468035,"color":"#08519c"},{"id":"C075","name":"长桥街道05社区","lon":120.212791,"lat":30.282544,"population":11950.0,"access":19.27247,"facilities":9,"nearest":1.636961,"color":"#08519c"},{"id":"C076","name":"长桥街道06社区","lon":120.213134,"lat":30.297722,"population":11230.0,"access":19.378504,"facilities":9,"nearest":1.26134,"color":"#08519c"},{"id":"C077","name":"长桥街道07社区","lon":120.212908,"lat":30.310849,"population":8590.0,"access":18.284538,"facilities":8,"nearest":1.404936,"color":"#08519c"},{"id":"C078","name":"长桥街道08社区","lon":120.212788,"lat":30.322875,"population":4410.0,"access":13.759088,"facilities":6,"nearest":1.031007,"color":"#3182bd"},{"id":"C079","name":"长桥街道09社区","lon":120.210643,"lat":30.336266,"population":2650.0,"access":6.686787,"facilities":4,"nearest":2.162864,"color":"#6baed6"},{"id":"C080","name":"长桥街道10社区","lon":120.213349,"lat":30.349194,"population":1270.0,"access":2.652812,"facilities":2,"nearest":3.094028,"color":"#9ecae1"},{"id":"C081","name":"新安街道01社区","lon":120.227278,"lat":30.230298,"population":1220.0,"access":5.372643,"facilities":3,"nearest":2.962686,"color":"#6baed6"},{"id":"C082","name":"新安街道02社区","lon":120.227766,"lat":30.242707,"population":1520.0,"access":5.372643,"facilities":3,"nearest":1.976639,"color":"#6baed6"},{"id":"C083","name":"新安街道03社区","lon":120.229702,"lat":30.258159,"population":2450.0,"access":8.536947,"facilities":5,"nearest":0.675464,"color":"#3182bd"},{"id":"C084","name":"新安街道04社区","lon":120.229201,"lat":30.2703,"population":3880.0,"access":16.063205,"facilities":7,"nearest":1.290892,"color":"#08519c"},{"id":"C085","name":"新安街道05社区","lon":120.226492,"lat":30.283055,"population":6070.0,"access":17.860765,"facilities":8,"nearest":0.993406,"color":"#08519c"},{"id":"C086","name":"新安街道06社区","lon":120.22897,"lat":30.296677,"population":5730.0,"access":14.760273,"facilities":7,"nearest":0.837224,"color":"#3182bd"},{"id":"C087","name":"新安街道07社区","lon":120.228972,"lat":30.308653,"population":4180.0,"access":15.184046,"facilities":7,"nearest":1.385854,"color":"#3182bd"},{"id":"C088","name":"新安街道08社区","lon":120.227243,"lat":30.324309,"population":2820.0,"access":8.426133,"facilities":5,"nearest":0.628836,"color":"#3182bd"},{"id":"C089","name":"新安街道09社区","lon":120.228701,"lat":30.337208,"population":1480.0,"access":2.652812,"facilities":2,"nearest":1.990141,"color":"#9ecae1"},{"id":"C090","name":"新安街道10社区","lon":120.227476,"lat":30.348214,"population":1390.0,"access":2.652812,"facilities":2,"nearest":3.166531,"color":"#9ecae1"},{"id":"C091","name":"江湾街道01社区","lon":120.245753,"lat":30.229287,"population":1110.0,"access":3.960938,"facilities":2,"nearest":1.545355,"color":"#9ecae1"},{"id":"C092","name":"江湾街道02社区","lon":120.24393,"lat":30.24284,"population":1280.0,"access":3.960938,"facilities":2,"nearest":1.201712,"color":"#9ecae1"},{"id":"C093","name":"江湾街道03社区","lon":120.245068,"lat":30.256103,"population":1780.0,"access":5.700285,"facilities":3,"nearest":2.075774,"color":"#6baed6"},{"id":"C094","name":"江湾街道04社区","lon":120.245676,"lat":30.268852,"population":2220.0,"access":7.125243,"facilities":4,"nearest":2.389913,"color":"#3182bd"},{"id":"C095","name":"江湾街道05社区","lon":120.242419,"lat":30.283748,"population":2990.0,"access":7.586647,"facilities":5,"nearest":1.140711,"color":"#3182bd"},{"id":"C096","name":"江湾街道06社区","lon":120.242678,"lat":30.295445,"population":2560.0,"access":7.586647,"facilities":5,"nearest":1.109057,"color":"#3182bd"},{"id":"C097","name":"江湾街道07社区","lon":120.243987,"lat":30.309397,"population":1900.0,"access":5.067723,"facilities":3,"nearest":2.334203,"color":"#6baed6"},{"id":"C098","name":"江湾街道08社区","lon":120.24293,"lat":30.32389,"population":1850.0,"access":2.87442,"facilities":2,"nearest":1.961251,"color":"#9ecae1"},{"id":"C099","name":"江湾街道09社区","lon":120.243079,"lat":30.336628,"population":1370.0,"access":1.135074,"facilities":1,"nearest":2.670668,"color":"#c6dbef"},{"id":"C100","name":"江湾街道10社区","lon":120.242439,"lat":30.350647,"population":1220.0,"access":1.135074,"facilities":1,"nearest":3.885028,"color":"#c6dbef"},{"id":"C101","name":"凤凰街道01社区","lon":120.261038,"lat":30.231723,"population":1180.0,"access":3.960938,"facilities":2,"nearest":1.039862,"color":"#9ecae1"},{"id":"C102","name":"凤凰街道02社区","lon":120.260885,"lat":30.242534,"population":1090.0,"access":3.960938,"facilities":2,"nearest":0.547362,"color":"#9ecae1"},{"id":"C103","name":"凤凰街道03社区","lon":120.259873,"lat":30.255837,"population":1290.0,"access":5.700285,"facilities":3,"nearest":1.799864,"color":"#6baed6"},{"id":"C104","name":"凤凰街道04社区","lon":120.261372,"lat":30.268804,"population":1530.0,"access":5.700285,"facilities":3,"nearest":3.244159,"color":"#6baed6"},{"id":"C105","name":"凤凰街道05社区","lon":120.261265,"lat":30.282398,"population":1300.0,"access":5.700285,"facilities":3,"nearest":2.842567,"color":"#6baed6"},{"id":"C106","name":"凤凰街道06社区","lon":120.261273,"lat":30.296743,"population":1400.0,"access":2.87442,"facilities":2,"nearest":2.816189,"color":"#9ecae1"},{"id":"C107","name":"凤凰街道07社区","lon":120.260115,"lat":30.31108,"population":1350.0,"access":2.87442,"facilities":2,"nearest":3.50297,"color":"#9ecae1"},{"id":"C108","name":"凤凰街道08社区","lon":120.260211,"lat":30.325002,"population":1350.0,"access":2.87442,"facilities":2,"nearest":3.614682,"color":"#9ecae1"},{"id":"C109","name":"凤凰街道09社区","lon":120.26106,"lat":30.335707,"population":1360.0,"access":1.135074,"facilities":1,"nearest":4.048983,"color":"#c6dbef"},{"id":"C110","name":"凤凰街道10社区","lon":120.260928,"lat":30.349436,"population":1050.0,"access":1.135074,"facilities":1,"nearest":4.895206,"color":"#c6dbef"},{"id":"C111","name":"石湖街道01社区","lon":120.274233,"lat":30.229305,"population":1160.0,"access":2.866972,"facilities":1,"nearest":2.117187,"color":"#9ecae1"},{"id":"C112","name":"石湖街道02社区","lon":120.275313,"lat":30.243297,"population":1160.0,"access":2.866972,"facilities":1,"nearest":1.891129,"color":"#9ecae1"},{"id":"C113","name":"石湖街道03社区","lon":120.276292,"lat":30.255104,"population":1330.0,"access":2.866972,"facilities":1,"nearest":2.572935,"color":"#9ecae1"},{"id":"C114","name":"石湖街道04社区","lon":120.277035,"lat":30.269968,"population":1050.0,"access":4.606319,"facilities":2,"nearest":3.896947,"color":"#6baed6"},{"id":"C115","name":"石湖街道05社区","lon":120.274835,"lat":30.282536,"population":1260.0,"access":1.739347,"facilities":1,"nearest":4.101791,"color":"#c6dbef"},{"id":"C116","name":"石湖街道06社区","lon":120.275306,"lat":30.296282,"population":1270.0,"access":1.739347,"facilities":1,"nearest":4.121512,"color":"#c6dbef"},{"id":"C117","name":"石湖街道07社区","lon":120.276204,"lat":30.309376,"population":1160.0,"access":1.739347,"facilities":1,"nearest":4.674015,"color":"#c6dbef"},{"id":"C118","name":"石湖街道08社区","lon":120.277532,"lat":30.324263,"population":1340.0,"access":0.0,"facilities":0,"nearest":5.255602,"color":"#d73027"},{"id":"C119","name":"石湖街道09社区","lon":120.274731,"lat":30.338241,"population":1330.0,"access":0.0,"facilities":0,"nearest":5.363304,"color":"#d73027"},{"id":"C120","name":"石湖街道10社区","lon":120.27506,"lat":30.349368,"population":1350.0,"access":0.0,"facilities":0,"nearest":5.96881,"color":"#d73027"}],"facilities":[{"id":"F01","name":"临江市第一人民医院","lon":120.188,"lat":30.29,"capacity":1500.0},{"id":"F02","name":"临江市中医院","lon":120.176,"lat":30.282,"capacity":850.0},{"id":"F03","name":"临江市妇幼保健院","lon":120.2,"lat":30.298,"capacity":600.0},{"id":"F04","name":"临江市第二人民医院","lon":120.182,"lat":30.304,"capacity":500.0},{"id":"F05","name":"临江市康复医院","lon":120.196,"lat":30.28,"capacity":400.0},{"id":"F06","name":"青禾社区卫生服务中心","lon":120.143,"lat":30.29,"capacity":260.0},{"id":"F07","name":"望江社区卫生服务中心","lon":120.233,"lat":30.29,"capacity":280.0},{"id":"F08","name":"云岭社区卫生服务中心","lon":120.188,"lat":30.332,"capacity":240.0},{"id":"F09","name":"南塘社区卫生服务中心","lon":120.188,"lat":30.248,"capacity":220.0},{"id":"F10","name":"北辰社区卫生服务中心","lon":120.153,"lat":30.32,"capacity":180.0},{"id":"F11","name":"东港社区卫生服务中心","lon":120.223,"lat":30.32,"capacity":200.0},{"id":"F12","name":"西林社区卫生服务中心","lon":120.153,"lat":30.26,"capacity":170.0},{"id":"F13","name":"长桥社区卫生服务中心","lon":120.223,"lat":30.26,"capacity":190.0},{"id":"F14","name":"江湾镇卫生院","lon":120.12,"lat":30.34,"capacity":120.0},{"id":"F15","name":"石湖乡卫生院","lon":120.256,"lat":30.24,"capacity":100.0}],"threshold_km":5.0};
+const map = L.map("map", { zoomControl: true, preferCanvas: true });
+
+const osm = L.tileLayer(
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }
+);
+const imagery = L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  { maxZoom: 19, attribution: "Tiles &copy; Esri" }
+);
+
+// 离线示意底图：不依赖外部瓦片，断网也能看清点位、图例和比例尺
+const allLats = DATA.records.map(r => r.lat);
+const allLons = DATA.records.map(r => r.lon);
+const dataBounds = L.latLngBounds(
+  [Math.min(...allLats), Math.min(...allLons)],
+  [Math.max(...allLats), Math.max(...allLons)]
+);
+const padded = dataBounds.pad(0.10);
+const south = padded.getSouth(), west = padded.getWest();
+const north = padded.getNorth(), east = padded.getEast();
+const schematic = L.layerGroup();
+L.rectangle(
+  [[dataBounds.getSouth(), dataBounds.getWest()], [dataBounds.getNorth(), dataBounds.getEast()]],
+  { color: "#c9d3dd", weight: 1.2, fillColor: "#f8fafc", fillOpacity: 1 }
+).addTo(schematic);
+for (let lon = Math.ceil(west / 0.04) * 0.04; lon <= east + 1e-9; lon += 0.04) {
+  L.polyline([[south, lon], [north, lon]], {
+    color: "#dde5ed", weight: 1, interactive: false
+  }).addTo(schematic);
+  L.marker([south + 0.008, lon], {
+    icon: L.divIcon({
+      className: "grid-label", html: lon.toFixed(2) + "°E",
+      iconSize: [64, 14], iconAnchor: [32, 0]
+    }),
+    interactive: false
+  }).addTo(schematic);
+}
+for (let lat = Math.ceil(south / 0.04) * 0.04; lat <= north + 1e-9; lat += 0.04) {
+  L.polyline([[lat, west], [lat, east]], {
+    color: "#dde5ed", weight: 1, interactive: false
+  }).addTo(schematic);
+  L.marker([lat, west + 0.006], {
+    icon: L.divIcon({
+      className: "grid-label", html: lat.toFixed(2) + "°N",
+      iconSize: [54, 14], iconAnchor: [0, 7]
+    }),
+    interactive: false
+  }).addTo(schematic);
+}
+schematic.addTo(map);
+
+const accessLayer = L.layerGroup().addTo(map);
+const facilityLayer = L.layerGroup().addTo(map);
+const catchmentLayer = L.layerGroup();
+
+L.control.layers(
+  {
+    "离线示意底图": schematic,
+    "OpenStreetMap（需联网）": osm,
+    "影像底图（需联网）": imagery
+  },
+  { "社区可达性": accessLayer, "医疗机构": facilityLayer, "5 km 服务范围": catchmentLayer },
+  { collapsed: true, position: "topright" }
+).addTo(map);
+L.control.scale({ imperial: false, position: "bottomright" }).addTo(map);
+
+const maxPopulation = Math.max(...DATA.records.map(r => r.population), 1);
+const hospitalIcon = L.divIcon({
+  className: "",
+  html: '<div class="hospital-pin">✚</div>',
+  iconSize: [24, 24],
+  iconAnchor: [12, 12]
+});
+
+function esc(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[ch]));
+}
+
+DATA.records.forEach(r => {
+  const radius = 4 + 7 * Math.sqrt(r.population / maxPopulation);
+  const marker = L.circleMarker([r.lat, r.lon], {
+    radius: radius, color: "#ffffff", weight: 0.8,
+    fillColor: r.color, fillOpacity: 0.88
+  });
+  marker.bindPopup(
+    '<div class="popup"><div class="popup-title">' + esc(r.name) + '</div>' +
+    '<div class="popup-id">' + esc(r.id) + '</div>' +
+    '<div class="popup-body">每千人床位：<b>' + r.access.toFixed(2) + '</b><br>' +
+    '需求人口：' + r.population.toLocaleString() + ' 人<br>' +
+    '阈值内机构：' + r.facilities + ' 家<br>' +
+    '最近机构直线距离：' + r.nearest.toFixed(2) + ' km</div></div>',
+    { maxWidth: 300 }
+  );
+  marker.bindTooltip(r.name + " · " + r.access.toFixed(2) + "/千人", { direction: "top" });
+  marker.addTo(accessLayer);
+});
+
+DATA.facilities.forEach(f => {
+  const marker = L.marker([f.lat, f.lon], { icon: hospitalIcon, title: f.name });
+  marker.bindPopup(
+    '<div class="popup"><div class="popup-title">' + esc(f.name) + '</div>' +
+    '<div class="popup-id">' + esc(f.id) + '</div>' +
+    '<div class="popup-body">容量：<b>' + f.capacity.toLocaleString() + '</b> 床位</div></div>',
+    { maxWidth: 280 }
+  );
+  marker.bindTooltip(f.name, { direction: "top" });
+  marker.addTo(facilityLayer);
+
+  L.circle([f.lat, f.lon], {
+    radius: DATA.threshold_km * 1000, color: "#7b8794", weight: 1,
+    opacity: 0.45, fill: false, dashArray: "4 4"
+  }).addTo(catchmentLayer);
+});
+
+const bounds = L.latLngBounds(DATA.records.map(r => [r.lat, r.lon]));
+map.fitBounds(bounds.pad(0.08));
+</script>
+</body>
+</html>

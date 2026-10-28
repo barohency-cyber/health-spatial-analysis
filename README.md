@@ -1,12 +1,19 @@
 # 医疗资源空间可达性：2SFCA 极简示例
 
+[![tests](https://github.com/barohency-cyber/health-spatial-analysis/actions/workflows/tests.yml/badge.svg)](https://github.com/barohency-cyber/health-spatial-analysis/actions/workflows/tests.yml)
+[![demo](https://img.shields.io/badge/demo-在线交互地图-2ea44f)](https://barohency-cyber.github.io/health-spatial-analysis/)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 面向 **卫生事业管理 / 公共卫生 / 数字治理** 方向的 2SFCA（两步移动搜索法）最小项目：
-不用装 ArcGIS，不依赖 GeoPandas，准备好两张 CSV 就能算；算完直接出 CSV、GeoJSON 和论文汇报用地图。
+不用装 ArcGIS，不依赖 GeoPandas，准备好两张 CSV 就能算；算完直接出 CSV、GeoJSON、论文图和可交互网页地图。
 
 > 仓库内全部为**模拟数据**：虚构的“临江市”、120 个社区、15 家医疗机构。
 > 机构名、位置、人口、床位均不对应真实地点，可直接公开上传 GitHub。
 
 ![医疗资源空间可达性地图](output/accessibility_map.png)
+
+**在线交互地图：** [barohency-cyber.github.io/health-spatial-analysis](https://barohency-cyber.github.io/health-spatial-analysis/)  
+默认使用离线示意底图，不依赖外部瓦片；也可以切换 OpenStreetMap 或影像底图（需联网）。
 
 ---
 
@@ -36,6 +43,8 @@ python code/two_step_fca.py --no-map
 ```powershell
 python -m unittest discover -s tests -v
 ```
+
+每次 push 后 GitHub Actions 会自动跑单元测试、无图 CLI 和网页地图生成，配置在 [`.github/workflows/tests.yml`](.github/workflows/tests.yml)。
 
 ---
 
@@ -175,6 +184,23 @@ python code/two_step_fca.py --threshold-km 10 --output-dir output/d10
 4. 新建打印布局，加比例尺、指北针、图例、数据来源；
 5. 导出 300 dpi PNG 或 PDF。
 
+### 交互地图（GitHub Pages）
+
+在线打开：<https://barohency-cyber.github.io/health-spatial-analysis/>
+
+- 点击圆点查看社区人口、每千人床位、阈值内机构数和最近机构距离；
+- 右上角可切换「离线示意底图 / OpenStreetMap / 影像底图」和「5 km 服务范围」；
+- 默认离线底图不依赖外部瓦片，网络不好也能正常展示点位和配色。
+
+本地重新生成：
+
+```powershell
+python code/make_web_map.py
+python -m http.server 8000 -d docs
+```
+
+然后打开 <http://localhost:8000/>。网页地图用 Leaflet 直接生成，不需要额外安装 folium。
+
 ### 结果解读示例
 
 ```text
@@ -269,12 +295,18 @@ P90/P10 约为 7.6。高值区集中在市中心，低值区和 0 值区主要�
 
 ```text
 .
+├── .github/
+│   └── workflows/tests.yml   # push 自动跑测试和网页生成
 ├── code/
 │   ├── two_step_fca.py       # 2SFCA 核心 + CSV/GeoJSON/地图输出
+│   ├── make_web_map.py       # 生成 docs/index.html 交互地图
 │   └── make_demo_data.py     # 重新生成模拟数据
 ├── data/
 │   ├── demand.csv            # 需求点（模拟）
 │   └── facilities.csv        # 医疗机构（模拟）
+├── docs/
+│   ├── .nojekyll
+│   └── index.html            # GitHub Pages 入口
 ├── output/
 │   ├── accessibility.csv
 │   ├── accessibility.geojson
@@ -283,6 +315,8 @@ P90/P10 约为 7.6。高值区集中在市中心，低值区和 0 值区主要�
 │   └── accessibility_map.svg
 ├── tests/
 │   └── test_two_step_fca.py  # 手算例子校验公式
+├── CITATION.cff
+├── LICENSE
 ├── README.md
 └── requirements.txt
 ```
@@ -313,8 +347,9 @@ topics: health-gis, 2sfca, healthcare-accessibility, public-health, qgis
 
 ---
 
-## 10. 数据与许可
+## 10. 数据、许可与引用
 
 - 仓库内数据为程序生成的模拟数据，不涉及真实人口、机构或边界；
-- 示例代码可自由修改用于课程作业、论文复现和复试展示；
+- 代码以 [MIT License](LICENSE) 开源，可自由修改用于课程作业、论文复现和复试展示；
+- 如果这个项目对你的研究有帮助，引用信息见 [CITATION.cff](CITATION.cff)；
 - 正式研究请替换为合规数据，并在论文中写明数据来源、年份、口径和伦理审批（如适用）。

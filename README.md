@@ -5,7 +5,7 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 面向 **卫生事业管理 / 公共卫生 / 数字治理** 方向的 2SFCA（两步移动搜索法）最小项目：
-不用装 ArcGIS，不依赖 GeoPandas，准备好两张 CSV 就能算；算完直接出 CSV、GeoJSON、论文图、可交互网页地图和 LISA 聚类图。
+不用装 ArcGIS，不依赖 GeoPandas，准备好两张 CSV 就能算；算完直接出 CSV、GeoJSON、论文图、可交互网页地图，并能继续做 LISA 和 SLM/SEM 空间回归。
 
 > 仓库内全部为**模拟数据**：虚构的“临江市”、120 个社区、15 家医疗机构。
 > 机构名、位置、人口、床位均不对应真实地点，可直接公开上传 GitHub。
@@ -44,7 +44,7 @@ python code/two_step_fca.py --no-map
 python -m unittest discover -s tests -v
 ```
 
-每次 push 后 GitHub Actions 会自动跑单元测试、无图 CLI、LISA 和网页地图生成，配置在 [`.github/workflows/tests.yml`](.github/workflows/tests.yml)。
+每次 push 后 GitHub Actions 会自动跑单元测试、无图 CLI、LISA、空间回归和网页地图生成，配置在 [`.github/workflows/tests.yml`](.github/workflows/tests.yml)。
 
 ---
 
@@ -112,6 +112,18 @@ A_i = Σ(R_j × W_ij)           （只对 d_ij ≤ d0 的机构求和）
 - 如果研究“医疗资源可及性”，常用床位数或执业（助理）医师数；
 - 机构可以落在研究区外，但要注意边界效应（见第 7 节）。
 
+### `data/outcomes.csv`：空间回归用的结果变量（可选）
+
+| community_id | outpatient_utilization | elderly_share | income_index |
+|---|---|---|---|
+| C001 | 0.3760 | 0.1219 | 0.9354 |
+| C002 | 0.3758 | 0.1385 | 1.2015 |
+
+- `outpatient_utilization`：两周就诊率（模拟），范围 0–1；
+- `elderly_share`：老年人口占比；
+- `income_index`：收入指数；
+- 这份表只用于 SLM/SEM 演示，运行 `python code/make_outcome_data.py` 会根据可达性结果重新生成。
+
 ### 从 QGIS 导出
 
 1. 把需求点/机构点图层的坐标系设为 `EPSG:4326`（WGS 84）；
@@ -174,6 +186,10 @@ python code/two_step_fca.py --threshold-km 10 --output-dir output/d10
 | `output/lisa_summary.json` | 全局 Moran's I、置换检验、各类聚类数量 |
 | `output/lisa_map.png` | LISA 高低值聚类图 |
 | `output/lisa_map.svg` | LISA 矢量图，便于排版修改 |
+| `output/spatial_regression_coefficients.csv` | OLS / SLM / SEM 系数、标准误、直接/间接效应 |
+| `output/spatial_regression_fits.csv` | 三个模型的 logL、AIC、BIC、残差 Moran's I |
+| `output/spatial_regression_fitted.csv` | 每个社区的实际值、拟合值和残差 |
+| `output/spatial_regression_summary.json` | 模型比较、LR 检验和方法说明 |
 
 字段解释：
 
@@ -263,6 +279,46 @@ python code/spatial_autocorr.py
 
 局限：LISA 的“显著”只说明空间聚集，不说明因果；k 近邻和直线距离会忽略路网、行政边界和空间异质性。置换次数（99/199/999）和随机种子也会让边缘个案略有变化，论文里应写明参数并做稳健性比较。不要把它写成“高可达性导致某健康结果”。
 
+### 空间回归：OLS / SLM / SEM
+
+如果研究问题是“可达性是否影响就医利用”，可以在 LISA 之后做空间计量：
+
+```powershell
+python code/make_outcome_data.py     # 已带 data/outcomes.csv，可跳过
+python code/spatial_regression.py
+```
+
+演示设定：
+
+- 因变量：`outpatient_utilization`（两周就诊率，模拟）；
+- 自变量：`access_per_1000`、`elderly_share`、`income_index`；
+- 空间权重：k = 6 最近邻、行标准化；
+- 模型：OLS、空间滞后（SLM）、空间误差（SEM）。
+
+示例结果：
+
+| 模型 | 可达性系数 | 空间参数 | 残差 Moran's I | AIC |
+|---|---:|---:|---:|---:|
+| OLS | 0.0141*** | — | 0.226*** | -572.2 |
+| SLM | 0.0140*** | ρ = 0.006, p = 0.942 | 0.224*** | -570.2 |
+| SEM | 0.0145*** | λ = 0.573*** | 0.032, p = 0.415 | -587.9 |
+
+怎么读：
+
+- OLS 残差仍有显著空间自相关（Moran's I = 0.226, p < 0.001），说明普通回归的标准误不可靠；
+- SLM 的 ρ 接近 0 且不显著，说明“邻居的就医利用直接带动本社区”这个机制不明显；
+- SEM 的 λ = 0.573 且显著，残差 Moran's I 降到 0.032，AIC 也最低，说明空间依赖主要在误差项；
+- 三个模型里可达性系数都为正且显著，但这是模拟数据，不能直接当因果结论。
+
+输出文件：
+
+- `spatial_regression_coefficients.csv`：系数、标准误、p 值、直接/间接/总效应；
+- `spatial_regression_fits.csv`：logL、AIC、BIC、残差 Moran's I；
+- `spatial_regression_fitted.csv`：每个社区的实际值、三个模型的拟合值和残差；
+- `spatial_regression_summary.json`：LR 检验和方法说明。
+
+**方法边界**：这是教学用最大似然实现，标准误由数值 Hessian 近似，ρ/λ 的检验在边界上要谨慎。正式论文建议用 `spreg` 或 GeoDa 复核，并做不同 k、不同权重、不同控制变量的敏感性分析；不要只报一个模型的结果。
+
 ---
 
 ## 6. 论文与复试表述模板
@@ -343,11 +399,14 @@ python code/spatial_autocorr.py
 ├── code/
 │   ├── two_step_fca.py       # 2SFCA 核心 + CSV/GeoJSON/地图输出
 │   ├── spatial_autocorr.py   # 全局 Moran's I + 局部 LISA
+│   ├── spatial_regression.py # OLS / SLM / SEM
+│   ├── make_outcome_data.py  # 生成模拟就医利用结果
 │   ├── make_web_map.py       # 生成 docs/index.html 交互地图
 │   └── make_demo_data.py     # 重新生成模拟数据
 ├── data/
 │   ├── demand.csv            # 需求点（模拟）
-│   └── facilities.csv        # 医疗机构（模拟）
+│   ├── facilities.csv        # 医疗机构（模拟）
+│   └── outcomes.csv          # 就医利用与协变量（模拟）
 ├── docs/
 │   ├── .nojekyll
 │   └── index.html            # GitHub Pages 入口
@@ -361,10 +420,15 @@ python code/spatial_autocorr.py
 │   ├── lisa.geojson
 │   ├── lisa_summary.json
 │   ├── lisa_map.png
-│   └── lisa_map.svg
+│   ├── lisa_map.svg
+│   ├── spatial_regression_coefficients.csv
+│   ├── spatial_regression_fits.csv
+│   ├── spatial_regression_fitted.csv
+│   └── spatial_regression_summary.json
 ├── tests/
 │   ├── test_two_step_fca.py  # 手算例子校验公式
 │   ├── test_spatial_autocorr.py
+│   ├── test_spatial_regression.py
 │   └── test_web_map.py       # 校验网页地图生成
 ├── CITATION.cff
 ├── LICENSE
@@ -386,7 +450,7 @@ python code/two_step_fca.py
 - **换路网**：用 QGIS 的 ORS Tools、OSRM，或高德/百度路径规划 API 生成 OD 时间矩阵，把 `haversine_km` 换成出行时间；
 - **换面数据**：用 GeoPandas 把社区面质心化，或直接做面到面 OD；
 - **空间自相关**：已内置 `spatial_autocorr.py`，可继续扩展不同 k、距离阈值、Queen 邻接权重，比较结果稳健性；
-- **空间回归**：以可达性为自变量，做 SLM/SEM，解释医保利用或健康结果；
+- **空间回归**：已内置 `spatial_regression.py` 的 OLS/SLM/SEM；下一步可做 GWR、空间中介或政策冲击的准实验设计；
 - **方法扩展**：E2SFCA、3SFCA、Huff 模型；但先把手里的 2SFCA 假设、阈值和边界效应讲清楚，比堆模型更加分。
 
 当前仓库已经设置的描述和 topics：

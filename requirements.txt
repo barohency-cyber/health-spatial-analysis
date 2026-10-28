@@ -1,2 +1,4 @@
-# 核心 2SFCA 计算只用 Python 标准库；地图输出需要 matplotlib
+# 核心 2SFCA / LISA / 网页地图只用 Python 标准库；
+# 地图输出需要 matplotlib，空间回归需要 numpy
 matplotlib>=3.8
+numpy>=1.24

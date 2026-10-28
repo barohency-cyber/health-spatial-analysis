@@ -1,0 +1,63 @@
+{
+  "method": "OLS / SLM / SEM (maximum likelihood)",
+  "dependent_variable": "outpatient_utilization",
+  "covariates": [
+    "access_per_1000",
+    "elderly_share",
+    "income_index"
+  ],
+  "n": 120,
+  "k": 6,
+  "weights": {
+    "type": "k nearest neighbors",
+    "row_standardized": true
+  },
+  "fits": [
+    {
+      "log_likelihood": 291.1188655292416,
+      "aic": -572.2377310584832,
+      "bic": -558.3002723445729,
+      "sigma2": 0.0004574430515132354,
+      "pseudo_r2": 0.9498237838838939,
+      "model": "OLS",
+      "spatial_parameter": null,
+      "residual_moran_i": 0.22581584970531163,
+      "residual_moran_p": 2.2917526265820104e-06
+    },
+    {
+      "log_likelihood": 291.12154416955264,
+      "aic": -570.2430883391053,
+      "bic": -553.518137882413,
+      "sigma2": 0.0004574204349116142,
+      "pseudo_r2": 0.9496962428227167,
+      "model": "SLM",
+      "spatial_parameter": 0.005740493273853842,
+      "residual_moran_i": 0.22375674915024885,
+      "residual_moran_p": 2.809382857822076e-06
+    },
+    {
+      "log_likelihood": 299.9324227013533,
+      "aic": -587.8648454027066,
+      "bic": -571.1398949460144,
+      "sigma2": 0.0003712517904725457,
+      "pseudo_r2": 0.9489156685283702,
+      "model": "SEM",
+      "spatial_parameter": 0.5732318249748809,
+      "residual_moran_i": 0.03203638628245471,
+      "residual_moran_p": 0.41452804692587786
+    }
+  ],
+  "lr_tests": {
+    "SLM_vs_OLS": {
+      "lr_statistic": 0.0053572806220927305,
+      "df": 1,
+      "p_value": 0.9416521812743757
+    },
+    "SEM_vs_OLS": {
+      "lr_statistic": 17.6271143442234,
+      "df": 1,
+      "p_value": 2.6872953132947696e-05
+    }
+  },
+  "note": "标准误由数值 Hessian 近似，ρ/λ 的检验在边界上应谨慎解读；这是教学实现，正式论文建议用 spreg 或 GeoDa 复核，并做不同 k 的敏感性分析。"
+}

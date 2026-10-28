@@ -44,7 +44,7 @@ python code/two_step_fca.py --no-map
 python -m unittest discover -s tests -v
 ```
 
-每次 push 后 GitHub Actions 会自动跑单元测试、无图 CLI、LISA、空间回归和网页地图生成，配置在 [`.github/workflows/tests.yml`](.github/workflows/tests.yml)。
+每次 push 后 GitHub Actions 会自动跑单元测试、无图 CLI、LISA、空间回归、GWR 和网页地图生成，配置在 [`.github/workflows/tests.yml`](.github/workflows/tests.yml)。
 
 ---
 

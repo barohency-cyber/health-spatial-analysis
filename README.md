@@ -314,7 +314,8 @@ P90/P10 约为 7.6。高值区集中在市中心，低值区和 0 值区主要�
 │   ├── accessibility_map.png
 │   └── accessibility_map.svg
 ├── tests/
-│   └── test_two_step_fca.py  # 手算例子校验公式
+│   ├── test_two_step_fca.py  # 手算例子校验公式
+│   └── test_web_map.py       # 校验网页地图生成
 ├── CITATION.cff
 ├── LICENSE
 ├── README.md
@@ -338,11 +339,11 @@ python code/two_step_fca.py
 - **空间回归**：以可达性为自变量，做 SLM/SEM，解释医保利用或健康结果；
 - **方法扩展**：E2SFCA、3SFCA、Huff 模型；但先把手里的 2SFCA 假设、阈值和边界效应讲清楚，比堆模型更加分。
 
-GitHub 仓库描述和 topics 可以写：
+当前仓库已经设置的描述和 topics：
 
 ```text
 description: 2SFCA-based spatial accessibility analysis for healthcare resources
-topics: health-gis, 2sfca, healthcare-accessibility, public-health, qgis
+topics: health-gis, 2sfca, healthcare-accessibility, public-health, qgis, spatial-analysis, leaflet, github-pages
 ```
 
 ---

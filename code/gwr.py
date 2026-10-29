@@ -156,29 +156,22 @@ def ols(y: np.ndarray, x: np.ndarray) -> dict[str, object]:
     }
 
 
-def fit_gwr(
+def fit_gwr_at_k(
     observations: Sequence[Observation],
     y: np.ndarray,
     x: np.ndarray,
-    terms: Sequence[str],
-    min_k: int,
-    max_k: int,
-    step: int,
-) -> tuple[list[dict[str, object]], dict[str, object]]:
+    k: int,
+    distances: np.ndarray | None = None,
+) -> tuple[list[dict[str, object]], dict[str, float], float]:
+    """固定带宽 k，返回局部系数、AICc 诊断和全局方差。"""
     n = len(y)
-    distances = distance_matrix(observations)
-    if not 5 <= min_k < max_k <= n - 1:
-        raise ValueError(f"带宽范围不合法：min_k={min_k}, max_k={max_k}, n={n}")
-    candidates = list(range(min_k, max_k + 1, step))
-    if candidates[-1] != max_k:
-        candidates.append(max_k)
-    scores = [gwr_aicc(y, x, distances, k) for k in candidates]
-    best = min(scores, key=lambda item: item["aicc"])
-    k = int(best["k"])
-
-    # 用最优 k 重新计算每个社区的局部结果与标准误
-    sigma2_global = float(best["rss"]) / (
-        n - 2 * float(best["trace_hat"]) + float(best["trace_hat_squared"])
+    if not 5 <= k <= n - 1:
+        raise ValueError(f"k 必须在 5 到 {n - 1} 之间")
+    if distances is None:
+        distances = distance_matrix(observations)
+    score = gwr_aicc(y, x, distances, k)
+    sigma2_global = float(score["rss"]) / (
+        n - 2 * float(score["trace_hat"]) + float(score["trace_hat_squared"])
     )
     rows = []
     for i, observation in enumerate(observations):
@@ -206,6 +199,31 @@ def fit_gwr(
                 "bandwidth_k": k,
             }
         )
+    return rows, score, sigma2_global
+
+
+def fit_gwr(
+    observations: Sequence[Observation],
+    y: np.ndarray,
+    x: np.ndarray,
+    terms: Sequence[str],
+    min_k: int,
+    max_k: int,
+    step: int,
+) -> tuple[list[dict[str, object]], dict[str, object]]:
+    n = len(y)
+    distances = distance_matrix(observations)
+    if not 5 <= min_k < max_k <= n - 1:
+        raise ValueError(f"带宽范围不合法：min_k={min_k}, max_k={max_k}, n={n}")
+    candidates = list(range(min_k, max_k + 1, step))
+    if candidates[-1] != max_k:
+        candidates.append(max_k)
+    scores = [gwr_aicc(y, x, distances, k) for k in candidates]
+    best = min(scores, key=lambda item: item["aicc"])
+    k = int(best["k"])
+    rows, best_score, sigma2_global = fit_gwr_at_k(
+        observations, y, x, k, distances=distances
+    )
 
     access_values = [row["access_coef"] for row in rows]
     local_r2_values = [row["local_r2"] for row in rows]
@@ -219,9 +237,9 @@ def fit_gwr(
         "candidate_bandwidths": [
             {"k": int(item["k"]), "aicc": float(item["aicc"])} for item in scores
         ],
-        "gwr_aicc": float(best["aicc"]),
-        "trace_hat": float(best["trace_hat"]),
-        "effective_parameters": float(best["trace_hat"]),
+        "gwr_aicc": float(best_score["aicc"]),
+        "trace_hat": float(best_score["trace_hat"]),
+        "effective_parameters": float(best_score["trace_hat"]),
         "sigma2": sigma2_global,
         "global_ols": ols(y, x),
         "access_coef_summary": {

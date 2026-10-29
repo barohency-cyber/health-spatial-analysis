@@ -15,6 +15,8 @@
 **在线交互地图：** [barohency-cyber.github.io/health-spatial-analysis](https://barohency-cyber.github.io/health-spatial-analysis/)  
 默认使用离线示意底图，不依赖外部瓦片；也可以切换 OpenStreetMap 或影像底图（需联网）。
 
+**现成材料：** [复试讲解卡](docs/复试讲解卡.md) · [论文结果草稿](docs/论文结果草稿.md)
+
 ---
 
 ## 1. 30 秒跑通
@@ -44,7 +46,7 @@ python code/two_step_fca.py --no-map
 python -m unittest discover -s tests -v
 ```
 
-每次 push 后 GitHub Actions 会自动跑单元测试、无图 CLI、LISA、空间回归、GWR 和网页地图生成，配置在 [`.github/workflows/tests.yml`](.github/workflows/tests.yml)。
+每次 push 后 GitHub Actions 会自动跑单元测试、无图 CLI、LISA、空间回归、GWR、GWR 带宽敏感性和网页地图生成，配置在 [`.github/workflows/tests.yml`](.github/workflows/tests.yml)。
 
 ---
 
@@ -193,6 +195,8 @@ python code/two_step_fca.py --threshold-km 10 --output-dir output/d10
 | `output/gwr_coefficients.csv` | 每个社区的 GWR 局部系数、局部 t 值、局部 R² |
 | `output/gwr_summary.json` | 带宽选择、AICc、局部系数范围和共线性诊断 |
 | `output/gwr_map.png` | GWR 局部可达性系数地图 |
+| `output/gwr_sensitivity.csv` | 不同带宽下的 AICc、局部系数范围和稳定性 |
+| `output/gwr_sensitivity.png` | 带宽敏感性双面板图 |
 
 字段解释：
 
@@ -352,6 +356,16 @@ python code/gwr.py
 - `gwr_summary.json`：带宽选择、AICc、有效参数、局部系数范围、局部共线性诊断；
 - `gwr_map.png/svg`：局部可达性系数地图。
 
+带宽敏感性分析：
+
+```powershell
+python code/gwr_sensitivity.py --min-k 20 --max-k 60 --step 5
+```
+
+示例结果：k = 20 时局部系数出现小幅负值（最小 -0.0014），k ≥ 25 后全部为正；k = 25–45 与最优 k = 35 的局部系数相关系数均高于 0.97。说明“市中心强、边缘弱”的模式在合理带宽内稳定，但过小带宽会不稳定。
+
+![GWR 带宽敏感性](output/gwr_sensitivity.png)
+
 **方法边界**：GWR 对带宽、局部共线性和异常值很敏感。示例中最大条件数超过 60 万，说明部分局部设计矩阵接近共线，局部系数要谨慎解读；正式论文应报告带宽敏感性、局部共线性，并考虑多重比较问题。
 
 ---
@@ -436,6 +450,7 @@ python code/gwr.py
 │   ├── spatial_autocorr.py   # 全局 Moran's I + 局部 LISA
 │   ├── spatial_regression.py # OLS / SLM / SEM
 │   ├── gwr.py                # 地理加权回归
+│   ├── gwr_sensitivity.py    # GWR 带宽敏感性
 │   ├── make_outcome_data.py  # 生成模拟就医利用结果
 │   ├── make_web_map.py       # 生成 docs/index.html 交互地图
 │   └── make_demo_data.py     # 重新生成模拟数据
@@ -445,7 +460,9 @@ python code/gwr.py
 │   └── outcomes.csv          # 就医利用与协变量（模拟）
 ├── docs/
 │   ├── .nojekyll
-│   └── index.html            # GitHub Pages 入口
+│   ├── index.html            # GitHub Pages 入口
+│   ├── 复试讲解卡.md
+│   └── 论文结果草稿.md
 ├── output/
 │   ├── accessibility.csv
 │   ├── accessibility.geojson
@@ -464,12 +481,17 @@ python code/gwr.py
 │   ├── gwr_coefficients.csv
 │   ├── gwr_summary.json
 │   ├── gwr_map.png
-│   └── gwr_map.svg
+│   ├── gwr_map.svg
+│   ├── gwr_sensitivity.csv
+│   ├── gwr_sensitivity_summary.json
+│   ├── gwr_sensitivity.png
+│   └── gwr_sensitivity.svg
 ├── tests/
 │   ├── test_two_step_fca.py  # 手算例子校验公式
 │   ├── test_spatial_autocorr.py
 │   ├── test_spatial_regression.py
 │   ├── test_gwr.py
+│   ├── test_gwr_sensitivity.py
 │   └── test_web_map.py       # 校验网页地图生成
 ├── CITATION.cff
 ├── LICENSE
@@ -477,11 +499,12 @@ python code/gwr.py
 └── requirements.txt
 ```
 
-重新生成模拟数据（会覆盖 `data/` 下两个 CSV）：
+重新生成模拟数据（会覆盖 `data/` 下的 CSV）：
 
 ```powershell
 python code/make_demo_data.py
 python code/two_step_fca.py
+python code/make_outcome_data.py
 ```
 
 ---
@@ -498,7 +521,9 @@ python code/two_step_fca.py
 
 ```text
 description: 2SFCA-based spatial accessibility analysis for healthcare resources
-topics: health-gis, 2sfca, healthcare-accessibility, public-health, qgis, spatial-analysis, leaflet, github-pages
+topics: health-gis, 2sfca, healthcare-accessibility, public-health, qgis, spatial-analysis,
+        leaflet, github-pages, lisa, morans-i, spatial-autocorrelation,
+        spatial-econometrics, slm, sem, gwr, geographically-weighted-regression
 ```
 
 ---

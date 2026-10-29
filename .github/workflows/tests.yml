@@ -41,5 +41,8 @@ jobs:
       - name: Run GWR
         run: python code/gwr.py --output-dir output/ci --no-map
 
+      - name: Run GWR bandwidth sensitivity
+        run: python code/gwr_sensitivity.py --output-dir output/ci --no-plot
+
       - name: Generate interactive map
         run: python code/make_web_map.py --output docs/index.html

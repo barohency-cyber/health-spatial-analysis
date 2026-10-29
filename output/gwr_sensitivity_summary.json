@@ -1,0 +1,141 @@
+{
+  "method": "GWR bandwidth sensitivity",
+  "n": 120,
+  "selected_k": 35,
+  "candidate_ks": [
+    20,
+    25,
+    30,
+    35,
+    40,
+    45,
+    50,
+    55,
+    60
+  ],
+  "table": [
+    {
+      "k": 20.0,
+      "aicc": -472.62568223589807,
+      "access_coef_min": -0.001425085194170471,
+      "access_coef_median": 0.01738261270596722,
+      "access_coef_max": 0.039047827004397205,
+      "negative_share": 0.008333333333333333,
+      "local_r2_median": 0.9181176457950957,
+      "condition_number_max": 1063443.4081733527,
+      "pearson_with_selected": 0.9175295796062761,
+      "rank_corr_with_selected": 0.945336481700118,
+      "same_sign_share": 0.9916666666666667
+    },
+    {
+      "k": 25.0,
+      "aicc": -508.4445875795201,
+      "access_coef_min": 0.0098720452957902,
+      "access_coef_median": 0.017691010416075303,
+      "access_coef_max": 0.03544416482171604,
+      "negative_share": 0.0,
+      "local_r2_median": 0.9282498583240185,
+      "condition_number_max": 685079.5833143913,
+      "pearson_with_selected": 0.9849126768537314,
+      "rank_corr_with_selected": 0.981311202166817,
+      "same_sign_share": 1.0
+    },
+    {
+      "k": 30.0,
+      "aicc": -516.6192613717503,
+      "access_coef_min": 0.013150752141747707,
+      "access_coef_median": 0.01797695867768964,
+      "access_coef_max": 0.03358973191897338,
+      "negative_share": 0.0,
+      "local_r2_median": 0.935447018600448,
+      "condition_number_max": 649306.8988858198,
+      "pearson_with_selected": 0.9959842227584795,
+      "rank_corr_with_selected": 0.9924578095701089,
+      "same_sign_share": 1.0
+    },
+    {
+      "k": 35.0,
+      "aicc": -520.6243046666382,
+      "access_coef_min": 0.014375102619389396,
+      "access_coef_median": 0.018131586419395718,
+      "access_coef_max": 0.03185401692158751,
+      "negative_share": 0.0,
+      "local_r2_median": 0.9405080487457125,
+      "condition_number_max": 606500.9430063294,
+      "pearson_with_selected": 1.0,
+      "rank_corr_with_selected": 1.0,
+      "same_sign_share": 1.0
+    },
+    {
+      "k": 40.0,
+      "aicc": -519.9786085484784,
+      "access_coef_min": 0.015165218157324257,
+      "access_coef_median": 0.01842036948491091,
+      "access_coef_max": 0.025586003810936602,
+      "negative_share": 0.0,
+      "local_r2_median": 0.9451844134897982,
+      "condition_number_max": 569048.008916748,
+      "pearson_with_selected": 0.9785532404645,
+      "rank_corr_with_selected": 0.9937634557955413,
+      "same_sign_share": 1.0
+    },
+    {
+      "k": 45.0,
+      "aicc": -518.4954715053623,
+      "access_coef_min": 0.01573351505508958,
+      "access_coef_median": 0.01859389389211003,
+      "access_coef_max": 0.024571959274734965,
+      "negative_share": 0.0,
+      "local_r2_median": 0.9469499827442835,
+      "condition_number_max": 546426.5930890249,
+      "pearson_with_selected": 0.9709258616764359,
+      "rank_corr_with_selected": 0.9904715605250365,
+      "same_sign_share": 1.0
+    },
+    {
+      "k": 50.0,
+      "aicc": -516.2428271203476,
+      "access_coef_min": 0.01622929894423941,
+      "access_coef_median": 0.01881466193756382,
+      "access_coef_max": 0.02365629755948243,
+      "negative_share": 0.0,
+      "local_r2_median": 0.9470613969083631,
+      "condition_number_max": 527712.810756913,
+      "pearson_with_selected": 0.9545211859665295,
+      "rank_corr_with_selected": 0.9803875269115909,
+      "same_sign_share": 1.0
+    },
+    {
+      "k": 55.0,
+      "aicc": -515.1013862380752,
+      "access_coef_min": 0.016709012191629055,
+      "access_coef_median": 0.018931541494660958,
+      "access_coef_max": 0.023416164879695212,
+      "negative_share": 0.0,
+      "local_r2_median": 0.9485224201030427,
+      "condition_number_max": 509725.2760145088,
+      "pearson_with_selected": 0.9461019768850102,
+      "rank_corr_with_selected": 0.9710257656781721,
+      "same_sign_share": 1.0
+    },
+    {
+      "k": 60.0,
+      "aicc": -512.4784057491488,
+      "access_coef_min": 0.017008795371469564,
+      "access_coef_median": 0.019145670276542077,
+      "access_coef_max": 0.02317072451883282,
+      "negative_share": 0.0,
+      "local_r2_median": 0.949677863241308,
+      "condition_number_max": 504402.3367327494,
+      "pearson_with_selected": 0.9379870091274575,
+      "rank_corr_with_selected": 0.9555385790679907,
+      "same_sign_share": 1.0
+    }
+  ],
+  "stability": {
+    "min_pearson_with_selected": 0.9175295796062761,
+    "min_rank_corr_with_selected": 0.945336481700118,
+    "min_same_sign_share": 0.9916666666666667
+  },
+  "note": "如果 k 变化时局部系数方向或排序大幅变化，GWR 结果只能作为探索性证据；不要只报告 AICc 最优的单一带宽。"
+}
